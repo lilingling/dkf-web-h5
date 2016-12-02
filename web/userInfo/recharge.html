@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>充值</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no" />
+    <link rel="stylesheet" href="../../css/sm.css">
+    <link rel="stylesheet" href="../../css/sm-extend.css">
+</head>
+
+<body>
+    <div class="page-group">
+        <div class="page page-current">
+            <div class="content">
+                <div class="bank-card">
+                    <div class="card-logo">
+                        <img src="../../img/card-logo1@2x.png" alt="" id="bank_img">
+                        <label class="jcard-name">招商银行</label>
+                    </div>
+                    <div class="card-num">
+                        <img src="../../img/card_logo2@2x.png" alt="" class="">
+                        <span class="jcard-num">6214********6242</span>
+                    </div>
+                    <div class="card-info">
+                        <label class="jcard-username">账户名: <span>茹*</span></label>
+                        <label class="card-limit">限额:<span>5万元/笔</span><span>10万元/月</span></label>
+                    </div>
+                </div>
+                <div class="recharge-inputbox">
+                    <label class="prop-name">充值金额（元）</label>
+                    <input type="text" class="input-recharge" placeholder="0.00" id="recharge_money" readonly="readonly">
+                </div>
+                <a href="" class="button button-fill jbutn-recharge">立即充值</a>
+                <div class="agreement">
+                    <input type="checkbox" name="square" id="square" checked="checked">
+                    <label for="square"></label>
+                    <p>我已阅读并同意<a href="${pathWeb}/user/test1.do" data-ajax="false">《通联支付代扣协议》</a></p>
+                </div>
+                <p class="recharge-tips">预计1分钟到账，以实际到账时间为准</p>
+            </div>
+        </div>
+    </div>
+</body>
+<script type='text/javascript' src='../../js/lib/zepto.js' charset='utf-8'></script>
+<script type='text/javascript' src='../../js/lib/sm.js' charset='utf-8'></script>
+<script type='text/javascript' src='../../js/lib/sm-extend.min.js' charset='utf-8'></script>
+<script src="../../js/keyboard.js"></script>
+<script>
+$(function() {
+    var recharge_money = document.getElementById('recharge_money');
+    recharge_money.onclick = function() {
+        new KeyBoard(recharge_money);
+        setTimeout(function() {
+            $('#table_0909099').addClass('active');
+        }, 200)
+
+    };
+
+    $('.jbutn-recharge').on('tap', function() {
+
+        $('#table_0909099').removeClass('active');
+
+        // 弹出交易密码弹框
+        $.modal({
+            title: '<div class="dealpassword-alert-title">' + '<div class="jclose">' + '<div class="left-line line"></div>' + '<div class="right-line line"></div>' + '</div>' + '<label>请输入交易密码</label>' + '</div>',
+            text: '<div class="dealpassword-alert-content">' + '<label class="prop-name">充值金额（元）</label>' + '<label class="prop-value">1200</label>' + '<div class="input-box ">' + '<div class="inner-box"><input type="password" /></div>' + '<div class="inner-box"><input type="password" readonly="readonly" /></div>' + '<div class="inner-box"><input type="password" readonly="readonly" /></div>' + '<div class="inner-box"><input type="password" readonly="readonly" /></div>' + '<div class="inner-box"><input type="password" readonly="readonly" /></div>' + '<div class="inner-box"><input type="password" readonly="readonly" /></div>' + '<input type="tel" id="pwd-input"  readonly="readonly" />' + '</div>' + '</div>'
+
+        });
+        var pwdInput = document.getElementById('pwd-input');
+            pwdInput.onclick = function() {
+            new KeyBoard(pwdInput);
+            setTimeout(function() {
+                $('#table_0909099').addClass('active');
+            }, 200)
+
+    };
+    });
+
+
+
+    // 绑定实名付弹窗
+    // $.modal({
+    //     text:'<div class="realname-alert-content">'
+    //         + '<div class="jclose">'
+    //         + '<div class="left-line line"></div>'
+    //         + '<div class="right-line line"></div>'
+    //         + '</div>'
+    //         +'<img src="../../img/card_icon@2x.png" class="">'
+    //         +'<p>尊敬的用户，您正在通过通联支付开通银行卡代扣支付功能。</p>'
+    //         +'<div class="phoneNum-row">'
+    //         +'<label>预留手机号:</label>'
+    //         +'<label>18511745835</label>'
+    //         +'</div>'
+    //         +'<div class="verifiyCode-row">'
+    //         +'<label>短信验证码:</label>'
+    //         +'<div class="input-box">'
+    //         +'<div class="inner-box"></div>'
+    //         +'<div class="inner-box"></div>'
+    //         +'<div class="inner-box"></div>'
+    //         +'<div class="inner-box"></div>'
+    //         +'<div class="inner-box"></div>'
+    //         +'<div class="inner-box"></div>'
+    //         + '<input type="tel" id="pwd-input" autofocus="autofocus"/>'
+    //         +'</div>'
+    //         +'</div>'
+    //         +'<p class="secondSend-tips">'
+    //         +'没收到验证码？<a href="">再次发送</a>'
+    //         +'</p>'
+    //         +'</div>',
+    //              buttons:[
+    //         {
+    //             text:'确定',
+    //             onClick:function(){}
+    //         }
+    //         ]
+
+    // });
+
+    var $input = $(".inner-box");
+    var pwdInput = document.getElementById('pwd-input');
+    $("#pwd-input").on("tap", function() {
+        new KeyBoard(pwdInput);
+    });
+
+    // $("#pwd-input").on("keyup", function() {
+    //   var pwd = $(this).val().trim();
+    //   for (var i = 0, len = pwd.length; i < len; i++) {
+    //     $input.find('input').eq("" + i + "").val(pwd[i]);
+    //   }
+    //   $input.each(function() {
+    //     var index = $(this).index();
+    //     if (index >= len) {
+    //       $(this).find('input').val("");
+    //     }
+    //   });
+    //   if (len == 6) {
+    //     self.sendPackage(pwd);//发送密码
+    //   }
+    // });
+
+
+
+});
+</script>
+
+</html>

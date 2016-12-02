@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>固收</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no" />
+    <link rel="stylesheet" href="../../css/sm.css">
+    <link rel="stylesheet" href="../../css/sm-extend.css">
+    <link rel="stylesheet" href="../../css/product.css">
+</head>
+
+<body>
+    <div class="page-group">
+        <div class="page page-current">
+            <div class="content infinite-scroll infinite-scroll-bottom" id="productContent" data-distance="100">
+                <div class="jproduct-list">
+                    <template v-for="item in productList">
+                        <div class="jproduct-card">
+                            <div class="jcard-header">
+                                <lable v-if="item.name.length>10" class="product-name" v-text="item.name.substr(0,10)+'...'"></lable>
+                                <lable v-else class="product-name" v-text="item.name"></lable>
+                                <div class="product-tags">
+                                    <ul class="list-unstyled list-inline">
+                                        <li v-if="item.couponAllowable==1"><span class="product-tag tag-useticket">可用劵</span></li>
+                                        <li>
+                                            <span v-if="item.riskLevel == 0" class="product-tag tag-lowrisk">低风险</span>
+                                            <span v-if="item.riskLevel == 1" class="product-tag tag-lowrisk">中低风险</span>
+                                            <span v-if="item.riskLevel == 2" class="product-tag tag-lowrisk">中风险</span>
+                                            <span v-if="item.riskLevel == 3" class="product-tag tag-lowrisk">中高风险</span>
+                                            <span v-if="item.riskLevel == 4" class="product-tag tag-lowrisk">高风险</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="product-type-box">
+                                    <template v-for="type in item.productTag">
+                                        <div class="product-type">
+                                            <span>{{type.name}}</span>
+                                        </div>
+                                    </template>
+                                </div>
+                            </div>
+                            <div class="jcard-content">
+                                <div class="row no-gutter">
+                                    <div class="col-25 text-center">
+                                        <div class="jproduct-rate">{{item.profitRate}}<span>%</span></div>
+                                    </div>
+                                    <div class="col-25 text-center">
+                                        <div class="jproduct-deadline">{{item.loanDeadline}}<span>个月</span></div>
+                                    </div>
+                                    <div class="col-50 text-right">
+                                        <div class="dashed">
+                                            <i class="icon icon-data"></i>
+                                            <div class="percentage-box">
+                                                <div class="percentage" data-percentage="{{item.percentage}}"></div>
+                                                <div class="percentage-value">
+                                                    {{item.percentage}}<span>%</span></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row no-gutter">
+                                    <div class="col-25 text-center">
+                                        <div class="prop-name">预期年化</div>
+                                    </div>
+                                    <div class="col-25 text-center">
+                                        <div class="prop-name">投资期限</div>
+                                    </div>
+                                    <div class="col-50 text-right">
+                                        <a :href="'./gushou_buy.html?eid='+item.eid" class="button button-fill button-buy external">立即购买</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </template>
+                </div>
+                <!-- 加载提示符 -->
+                <div class="infinite-scroll-preloader">
+                    <div class="preloader"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <a href="" class="butn-filter open-options">
+        <img src="../../img/butn-filter.png" alt="">
+    </a>
+    <div class="popup popup-options">
+        <div class="popup-list">
+            <ul>
+                <li @click="queryFilter('1')" data-index="0">1-3个月</li>
+                <li @click="queryFilter('3')" data-index="1">3-6个月</li>
+                <li @click="queryFilter(6)" data-index="2">6-12个月</li>
+                <li @click="queryFilter(12)" data-index="2">12个月以上</li>
+                <li @click="queryFilter()" data-index="3">全部</li>
+            </ul>
+            <ul>
+                <li class="close-popup">取消</li>
+            </ul>
+        </div>
+    </div>
+    <script type='text/javascript' src='../../js/lib.min.js' charset='utf-8'></script>
+    <script type='text/javascript' src='../../js/base.js' charset='utf-8'></script>
+    <script>
+    $(function() {
+        $.init();
+
+        //当前页
+        var pageNum = 0;
+        //是否最后一页
+        var isAll = false;
+        var arry = [];
+        var url = 'http://192.168.1.220:8080/dkf-web/';
+        var vm = new Vue({
+            el: 'body',
+            data: {
+                productList: []
+            },
+            methods: {
+                queryFilter:function(loanDeadline) {
+                    var _self = this;
+                    $.ajax({
+                        url: url + 'product/productFinancingList',
+                        type: 'POST',
+                        data: JSON.stringify({
+                            "pageNum": pageNum,
+                            "loanDeadline":loanDeadline
+                        }),
+                        success: function(res) {
+                            if(res.state == 0) {
+                                _self.productList=res.data.list;
+                                if (res.data.currentPage == res.data.totalPage) {
+                                    isAll = true;
+                                    // 加载完毕，则注销无限加载事件，以防不必要的加载
+                                    $.detachInfiniteScroll($('.infinite-scroll'));
+                                    // 删除加载提示符
+                                    $('.infinite-scroll-preloader').remove();
+                                    return;
+                                }
+                            }
+
+                        }
+                    });
+                },
+                initData: function() {
+                    var _self = this;
+                    if (isAll) {
+                        $.toast('没有更多数据');
+                    } else {
+                        pageNum++;
+                        $.ajax({
+                            url: url + 'product/productFinancingList',
+                            type: 'POST',
+                            data: JSON.stringify({
+                                "pageNum": pageNum }),
+                            success: function(res) {
+                                if(res.state == 0) {
+                                    _self.productList=_self.productList.concat(res.data.list);
+                                    if (res.data.currentPage == res.data.totalPage) {
+                                        isAll = true;
+                                        // 加载完毕，则注销无限加载事件，以防不必要的加载
+                                        $.detachInfiniteScroll($('.infinite-scroll'));
+                                        // 删除加载提示符
+                                        $('.infinite-scroll-preloader').remove();
+                                        return;
+                                    }
+                                }
+
+                            }
+                        });
+                    }
+                }
+            },
+            ready: function() {
+                this.initData();
+            }
+        });
+
+        // 圆环百分比
+        var t = setTimeout(function() {
+            $.each($('.percentage'),function(index,item) {
+                var angle = $(this).data('percentage') / 100 * 180;
+                $(this).addClass('active').css('transform', 'rotate( ' + (-135 + angle) + 'deg)');
+            });
+        },1000)
+
+
+
+        //弹出筛选框
+        $(document).on('click', '.open-options', function() {
+            $.popup('.popup-options');
+        });
+
+
+
+        //向上滑动加载更多
+        var loading = false;
+        // 注册'infinite'事件处理函数
+        $(document).on('infinite', '.infinite-scroll-bottom', function() {
+            // 如果正在加载，则退出
+            if (loading) return;
+
+            // 设置flag
+            loading = true;
+            // 模拟1s的加载过程
+            setTimeout(function() {
+                // 重置加载flag
+                loading = false;
+                // 添加新条目
+                vm.initData();
+                //容器发生改变,如果是js滚动，需要刷新滚动
+                $.refreshScroller();
+            }, 1000);
+        });
+    });
+    </script>
+</body>
+
+</html>

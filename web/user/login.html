@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>登录</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="stylesheet" href="../../css/sm.css">
+    <link rel="stylesheet" href="../../css/sm-extend.css">
+</head>
+
+<body>
+    <div class="page-group">
+        <div class="page page-current">
+            <div class="content pd20 bg-white bg-login">
+                <img src="../../img/logo@2x.png" class="logo" />
+                <div class="list-block">
+                    <ul>
+                        <li>
+                            <div class="item-content">
+                                <div class="item-media border-right"><i class="icon icon-form icon-form-phone"></i></div>
+                                <div class="item-inner">
+                                    <div class="item-input">
+                                        <input type="tel" placeholder="请输入您的手机号" id="userPhone">
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="item-content">
+                                <div class="item-media border-right"><i class="icon icon-form icon-form-password"></i></div>
+                                <div class="item-inner">
+                                    <div class="item-input">
+                                        <input type="password" placeholder="请输入您的登录密码" id="loginPassword">
+                                    </div>
+                                </div>
+                                <div class="item-media"><i class="icon icon-form icon-form-eye" id="icon_eye"></i></div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <a href="#" class="button button-fill" id="login">登录</a>
+                <a href="${pathWeb}/toFindPassword.do" class="sub pull-right clearfix" style="margin-top:.87rem;">忘记密码</a>
+                <p class="foot-info">现在还没有账号?现在去<a href="${pathWeb}/toRegister.do">免费注册</a></p>
+            </div>
+        </div>
+    </div>
+<script type='text/javascript' src='../../js/lib/zepto.js' charset='utf-8'></script>
+<script type='text/javascript' src='../../js/lib/sm.min.js' charset='utf-8'></script>
+<script type='text/javascript' src='../../js/lib/sm-extend.min.js' charset='utf-8'></script>
+<script type="text/javascript" src='../../js/user.js'></script>
+<script type="text/javascript">
+$.init();
+
+
+
+</script>
+    </body>
+    </html>

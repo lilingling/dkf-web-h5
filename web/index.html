@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>首页</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="stylesheet" href="../css/sm.css">
+    <link rel="stylesheet" href="../css/sm-extend.css">
+</head>
+
+<body>
+    <div class="page-group">
+        <div class="page page-current">
+            <div class="content infinite-scroll infinite-scroll-bottom " data-distance="100">
+                <!-- slide-banner -->
+                <div class="swiper-container jbanner">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                            <a href="${item.external_link_title}"><img src="../../img/banner1.png" /></a>
+                        </div>
+                        <div class="swiper-slide">
+                            <a href="${pathWeb}/content/showContentDetails/${item.id}.do"><img src="../../img/banner2.png" /></a>
+                        </div>
+                        <div class="swiper-slide">
+                            <a href="#"><img src="../../img/banner1.png" /></a>
+                        </div>
+                    </div>
+                    <div class="swiper-pagination"></div>
+                </div>
+                <!-- notice -->
+                <div class="notice">
+                    <i class="icon icon-notice"></i>
+                    <ul class="jnotice-list">
+                        <li>
+                            <a href="">道口财富运营升级！1</a>
+                        </li>
+                        <li>
+                            <a href="">道口财富运营升级！2</a>
+                        </li>
+                        <li>
+                            <a href="">道口财富运营升级！3</a>
+                        </li>
+                        <li>
+                            <a href="">道口财富运营升级！4</a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- six modules -->
+                <div class="module-area">
+                    <div class="row no-gutter bb">
+                        <div class="col-33 module module-welfare">
+                            <a href="#">
+                                <i class="icon icon-module icon-module-welfare"></i>
+                                <em>新手有礼</em>
+                            </a>
+                        </div>
+                        <div class="col-33 module module-safe">
+                            <a href="#">
+                                <i class="icon icon-module icon-module-safe"></i>
+                                <em>安全保障</em>
+                            </a>
+                        </div>
+                        <div class="col-33 module module-data">
+                            <a href="#">
+                                <i class="icon icon-module icon-module-data"></i>
+                                <em>平台数据</em>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="row no-gutter">
+                        <div class="col-33 module module-gushou">
+                            <a href="#">
+                                <i class="icon icon-module icon-module-gushou"></i>
+                                <em>固收理财</em>
+                            </a>
+                        </div>
+                        <div class="col-33 module module-jijin">
+                            <a href="#">
+                                <i class="icon icon-module icon-module-jijin"></i>
+                                <em>基金理财</em>
+                            </a>
+                        </div>
+                        <div class="col-33 module module-piaoju">
+                            <a href="#">
+                                <i class="icon icon-module icon-module-piaoju"></i>
+                                <em>票据理财</em>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <!-- product recommend -->
+                <div class="product-recommend ">
+                    <div class="recommend-title">
+                        <i class="line"></i>
+                        <em>首页推荐</em>
+                        <i class="line"></i>
+                    </div>
+                    <div class="jproduct-list">
+<!--                         <div class="jproduct-card">
+                            <div class="jcard-header">
+                                <lable class="product-name">项目名称第一期</lable>
+                                <div class="product-tags">
+                                    <ul class="list-unstyled list-inline">
+                                        <li>
+                                            <span class="product-tag tag-useticket">可用劵</span>
+                                        </li>
+                                        <li>
+                                            <span class="product-tag tag-lowrisk">低风险</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="product-banner">
+                                    <span>新手专享</span>
+                                </div>
+                            </div>
+                            <div class="jcard-content">
+                                <div class="row no-gutter">
+                                    <div class="col-25 text-center">
+                                        <div class="jproduct-rate">10<span>%</span></div>
+                                    </div>
+                                    <div class="col-25 text-center">
+                                        <div class="jproduct-deadline">1<span>个月</span></div>
+                                    </div>
+                                    <div class="col-50 text-right">
+                                        <div class="dashed">
+                                            <i class="icon icon-data"></i>
+                                            <div class="percentage-box">
+                                                <div class="percentage" data-percentange='70'></div>
+                                                <div class="percentage-value">70<span>%</span></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row no-gutter">
+                                    <div class="col-25 text-center">
+                                        <div class="prop-name">预期年化</div>
+                                    </div>
+                                    <div class="col-25 text-center">
+                                        <div class="prop-name">投资期限</div>
+                                    </div>
+                                    <div class="col-50 text-right">
+                                        <a href="" class="button button-buy">立即购买</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> -->
+                    </div>
+                    <!-- 加载提示符 -->
+                    <div class="infinite-scroll-preloader">
+                        <div class="preloader"></div>
+                    </div>
+                </div>
+            </div>
+            <!-- platform data -->
+            <div class="platform-data">
+                <div class="row no-gutter">
+                    <div class="total-amount col-50 text-center">
+                        <lable class="prop-name">用户累积投资金额(元)</lable>
+                        <em class="prop-value jamount-value">1,000,000</em>
+                    </div>
+                    <div class="total-profit col-50 text-center">
+                        <lable class="prop-name">预期及已获益收益(元)</lable>
+                        <em class="prop-value jprofit-value">1,000,000</em>
+                    </div>
+                </div>
+            </div>
+            <!-- footer-tab -->
+            <nav class="bar bar-tab">
+                <a class="tab-item external active" href="#">
+                    <span class="icon icon-footer icon-footer-home"></span>
+                    <span class="tab-label">首页</span>
+                </a>
+                <a class="tab-item external" href="#">
+                    <span class="icon icon-footer icon-footer-finance "></span>
+                    <span class="tab-label">理财</span>
+                </a>
+                <a class="tab-item external" href="#">
+                    <span class="icon icon-footer icon-footer-me"></span>
+                    <span class="tab-label">我的</span>
+                </a>
+            </nav>
+        </div>
+    </div>
+    <script type='text/javascript' src='../js/lib/zepto.js' charset='utf-8'></script>
+    <script type='text/javascript' src='../js/lib/sm.js' charset='utf-8'></script>
+    <script type='text/javascript' src='../js/lib/sm-extend.min.js' charset='utf-8'></script>
+    <script type='text/javascript' src="../js/lib/swiper.min.js"></script>
+
+    <script>
+    $(function() {
+    $.init();
+    /*
+     * 向上滑动加载更多
+     */
+
+     // 加载flag
+    var loading = false;
+    // 最多可加载的条目
+    var maxItems = 20;
+
+    // 每次加载添加多少条目
+    var itemsPerLoad = 10;
+
+    function addItems(number, lastIndex) {
+        // 生成新条目的HTML
+        var html = '';
+        for (var i = lastIndex + 1; i <= lastIndex + number; i++) {
+            html +=
+        '<div class="jproduct-card">'
+
+      +   '<div class="jcard-header">'
+      +     '<lable class="product-name">项目第'+ i +'期</lable>'
+      +     '<div class="product-tags">'
+      +       '<ul class="list-unstyled list-inline">'
+      +         '<li><span class="product-tag tag-useticket">可用劵</span></li>'
+      +         '<li><span class="product-tag tag-lowrisk">低风险</span></li>'
+      +       '</ul>'
+      +     '</div>'
+      +     '<div class="product-banner">'
+      +       '<span>新手专享</span>'
+      +     '</div>'
+      +   '</div>'
+
+      +   '<div class="jcard-content">'
+      +     '<div class="row no-gutter">'
+      +       '<div class="col-25 text-center">'
+      +         '<div class="jproduct-rate">10<span>%</span></div>'
+      +       '</div>'
+      +       '<div class="col-25 text-center">'
+      +         '<div class="jproduct-deadline">1<span>个月</span></div>'
+      +       '</div>'
+      +       '<div class="col-50 text-right">'
+      +         '<div class="dashed">'
+      +           '<i class="icon icon-data"></i>'
+      +           '<div class="percentage-box">'
+      +             '<div class="percentage" data-percentange="70"></div>'
+      +             '<div class="percentage-value">70<span>%</span></div>'
+      +           '</div>'
+      +         '</div>'
+      +       '</div>'
+      +     '</div>'
+      +     '<div class="row no-gutter">'
+      +       '<div class="col-25 text-center">'
+      +         '<div class="prop-name">预期年化</div>'
+      +       '</div>'
+      +       '<div class="col-25 text-center">'
+      +         '<div class="prop-name">投资期限</div>'
+      +       '</div>'
+      +       '<div class="col-50 text-right">'
+      +         '<a href="" class="button button-buy">立即购买</a>'
+      +       '</div>'
+      +     '</div>'
+      +   '</div>'
+      + '</div>'
+
+        }
+        // 添加新条目
+        $('.infinite-scroll-bottom .jproduct-list').append(html);
+
+    }
+    //预先加载20条
+    addItems(itemsPerLoad, 0);
+
+    // 上次加载的序号
+    var lastIndex = 10;
+
+    // 注册'infinite'事件处理函数
+    $(document).on('infinite', '.infinite-scroll-bottom', function() {
+        // 如果正在加载，则退出
+        if (loading) return;
+
+        // 设置flag
+        loading = true;
+
+        // 模拟1s的加载过程
+        setTimeout(function() {
+            // 重置加载flag
+            loading = false;
+
+            if (lastIndex >= maxItems) {
+                // 加载完毕，则注销无限加载事件，以防不必要的加载
+                $.detachInfiniteScroll($('.infinite-scroll'));
+                // 删除加载提示符
+                $('.infinite-scroll-preloader').remove();
+                return;
+            }
+
+            // 添加新条目
+            addItems(itemsPerLoad, lastIndex);
+            // 更新最后加载的序号
+            lastIndex = $('.jproduct-list').find('.jproduct-card').length;
+            //容器发生改变,如果是js滚动，需要刷新滚动
+            $.refreshScroller();
+        }, 1000);
+    });
+
+
+    // swiper
+    var swiper = new Swiper('.swiper-container', {
+        direction: "horizontal",
+        autoplay: 2000,
+        loop: true,
+        pagination: ".swiper-pagination"
+    });
+
+    // notice 无缝滚动
+    function scroll() {
+        $('.jnotice-list').animate({
+            'margin-top': '-2rem'
+        }, function() {
+            $(this).find('li').eq(0).appendTo('.jnotice-list');
+            $('.jnotice-list').css('margin-top', 0);
+        });
+    }
+    setInterval(scroll, 2000)
+
+    // 圆环百分比
+    var percentange = ($('.percentage').data('percentange') / 100 * 180);
+    $('.percentage').addClass('active').css('transform', 'rotate( ' + (-135 + percentange) + 'deg)');
+
+    // 页面滑动 平台数据tab收起
+     (function () {
+        var startPosition, endPosition, deltaX, deltaY, moveLength;
+
+        document.addEventListener('touchstart', function (e) {
+            var touch = e.touches[0];
+            startPosition = {
+                x: touch.pageX,
+                y: touch.pageY
+            }
+        });
+
+        document.addEventListener('touchmove', function (e) {
+            var touch = e.touches[0];
+            endPosition = {
+                x: touch.pageX,
+                y: touch.pageY
+            }
+            deltaY = endPosition.y - startPosition.y;
+            console.log(deltaY);
+            if(deltaY <= -100) {
+                $('.platform-data').addClass('active');
+            }
+        });
+    })();
+
+
+});
+
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>账户详情</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="stylesheet" href="../../css/sm.css">
+    <link rel="stylesheet" href="../../css/sm-extend.css">
+    <link rel="stylesheet" href="../../css/userAccount.css">
+
+</head>
+
+<body>
+    <div class="page-group">
+        <div class="page page-current">
+            <div class="content account-detail">
+                <div class="asset">
+                    <div class="asset-detail">
+                        <div class="prop-name">总资产(元)</div>
+                        <div class="prop-value">1000,000</div>
+                        <i class="icon icon-assetdetail"></i>
+                    </div>
+                    <div id="pie_chart" class="pie-chart">
+                    </div>
+                    <p>总收益(元) <strong>2,000</strong></p>
+                </div>
+                <div class="list-block" style="margin:0 0 .25rem 0">
+                    <ul>
+                        <li class="item-content">
+                            <div class="item-media"><i class="icon icon-assetdetail-gushou"></i></div>
+                            <div class="item-inner">
+                                <div class="item-title">固收(元)</div>
+                                <div class="item-detail">100,000</div>
+                                <div class="item-after">收益:146</div>
+                            </div>
+                        </li>
+                        <li class="item-content">
+                            <div class="item-media"><i class="icon icon-assetdetail-piaoju"></i></div>
+                            <div class="item-inner">
+                                <div class="item-title">票据(元)</div>
+                                <div class="item-detail">100,000,000</div>
+                                <div class="item-after">收益:1464342342</div>
+                            </div>
+                        </li>
+                        <li class="item-content">
+                            <div class="item-media"><i class="icon icon-assetdetail-jijin"></i></div>
+                            <div class="item-inner">
+                                <div class="item-title">基金(元)</div>
+                                <div class="item-detail">100,000,000</div>
+                                <div class="item-after">收益:146</div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="data-trend">
+                    <div class="trend-line " id="trend_line">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type='text/javascript' src='../../js/lib/zepto.js' charset='utf-8'></script>
+    <script type='text/javascript' src='../../js/lib/sm.js' charset='utf-8'></script>
+    <script type='text/javascript' src='../../js/lib/sm-extend.js' charset='utf-8'></script>
+    <script src="../../js/lib/echarts.min.js"></script>
+    <script>
+    $(function() {
+        var myChart = echarts.init(document.getElementById('trend_line'));
+        // 指定图表的配置项和数据
+        var option = {
+            baseOption: {
+                tooltip: {
+                    trigger: 'axis',
+                    triggerOn: 'click',
+                    transitionDuration: 0,
+                    formatter: '{b0}<br />{a0}: {c0}k',
+                    axisPointer: {
+                        type: 'shadow',
+                        animation: false,
+                        shadowStyle: {
+                            color: 'rgba(245,144,88,0.3)'
+                        }
+                    },
+                    textStyle: {
+                        fontSize: 10
+                    }
+                },
+
+                grid: {
+                    show: false,
+                    left: '2%',
+                    right: '4%',
+                    bottom: '3%',
+                    containLabel: true,
+                    borderColor: '#ddd'
+                },
+                xAxis: {
+                    type: 'category',
+                    data: ['9.1' + '-' + '9.1',
+                        '9.1' + '-' + '9.1',
+                        '9.1' + '-' + '9.1',
+                        '9.1' + '-' + '9.1'
+                    ],
+                    splitLine: {
+                        show: true,
+                        lineStyle: {
+                            color: '#ddd'
+                        }
+                    }
+
+                },
+                yAxis: {
+                    name: '金额（元）',
+                    type: 'value',
+                    axisLabel: {
+                        formatter: '{value} k'
+
+                    },
+                    splitLine: {
+                        show: true,
+                        lineStyle: {
+                            color: '#ddd'
+                        }
+
+                    }
+
+                },
+                series: [{
+                    name: '投资总额',
+                    type: 'line',
+                    stack: '总量',
+                    data: [1000, 200, 600, 100]
+                }],
+                backgroundColor: '#fff',
+                color: ['#f59058']
+            },
+            media: [{
+                query: {
+                    maxWidth: 400 // 当容器宽度小于 500 时。
+                },
+                option: {
+                    xAxis: {
+                        axisLabel: {
+                            textStyle: {
+                                fontSize: '9'
+                            }
+                        }
+                    },
+                    yAxis: {
+                        axisLabel: {
+                            textStyle: {
+                                fontSize: '10'
+
+                            }
+                        }
+                    }
+
+                }
+            }]
+        };
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+
+        // 饼图
+        var pieChart = echarts.init(document.getElementById('pie_chart'));
+        var pieOption = {
+
+            series: [{
+                name: '资产详情',
+                type: 'pie',
+                // 是否开启hover扇区放大效果
+                hoverAnimation: false,
+                //选中扇区偏移距离
+                selectedOffset: 10,
+                radius: ['90%', '100%'],
+                avoidLabelOverlap: false,
+                // 饼图图形上的文本标签
+                label: {
+                    normal: {
+                        show: false
+                    }
+                },
+                labelLine: {
+                    normal: {
+                        show: false
+                    }
+                },
+                data: [{
+                    value: 335,
+                    name: '固收'
+                }, {
+                    value: 310,
+                    name: '票据'
+                }, {
+                    value: 234,
+                    name: '基金'
+                }],
+                color: ['#c33552', '#e16781', '#ffae01']
+            }]
+        };
+        pieChart.setOption(pieOption);
+
+    })
+    </script>
+</body>
+
+</html>

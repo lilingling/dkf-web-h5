@@ -1,0 +1,444 @@
+/* product css */
+.product-banner {
+  padding: 1rem 0;
+  height: 10.425rem;
+  background-color: #fff;
+}
+.product-banner #container1,
+.product-banner #container2,
+.product-banner #container3,
+.product-banner #container4 {
+  position: relative;
+  width: 8.4rem;
+  height: 8.4rem;
+}
+.product-banner #container1 .banner-content,
+.product-banner #container2 .banner-content,
+.product-banner #container3 .banner-content,
+.product-banner #container4 .banner-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  text-align: center;
+}
+.product-banner #container1 .banner-content .banner-title,
+.product-banner #container2 .banner-content .banner-title,
+.product-banner #container3 .banner-content .banner-title,
+.product-banner #container4 .banner-content .banner-title {
+  font-size: .7rem;
+  padding: 1.4rem 0 .8rem;
+}
+.product-banner #container1 .banner-content .banner-title i,
+.product-banner #container2 .banner-content .banner-title i,
+.product-banner #container3 .banner-content .banner-title i,
+.product-banner #container4 .banner-content .banner-title i {
+  margin-right: .25rem;
+}
+.product-banner #container1 .banner-content .prop-name,
+.product-banner #container2 .banner-content .prop-name,
+.product-banner #container3 .banner-content .prop-name,
+.product-banner #container4 .banner-content .prop-name {
+  font-size: .55rem;
+  color: #555;
+}
+.product-banner #container1 .banner-content .prop-value,
+.product-banner #container2 .banner-content .prop-value,
+.product-banner #container3 .banner-content .prop-value,
+.product-banner #container4 .banner-content .prop-value {
+  font-size: 1.75rem;
+  color: #af294d;
+  padding: .4rem 0;
+}
+.product-banner #container1 .banner-content .prop-extraname,
+.product-banner #container2 .banner-content .prop-extraname,
+.product-banner #container3 .banner-content .prop-extraname,
+.product-banner #container4 .banner-content .prop-extraname {
+  font-size: .6rem;
+  color: #555;
+}
+.product-banner #container1 .banner-content .prop-extraname strong,
+.product-banner #container2 .banner-content .prop-extraname strong,
+.product-banner #container3 .banner-content .prop-extraname strong,
+.product-banner #container4 .banner-content .prop-extraname strong {
+  color: #af294d;
+}
+.activity-product {
+  margin: .25rem 0;
+}
+.activity-product .item-content {
+  padding: 1rem;
+}
+.activity-product .item-content .item-inner {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+.activity-product .item-content .item-title {
+  font-size: .8rem;
+  margin-bottom: .5rem;
+}
+.activity-product .item-content .item-subtitle {
+  font-size: .65rem;
+  color: #af294d;
+}
+.swiper-container {
+  width: 100%;
+}
+.swiper-slide {
+  text-align: center;
+  font-size: 18px;
+  background: #fff;
+  width: 60%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+}
+.circle-outer {
+  border-radius: 50%;
+  box-shadow: 0 0 0px 6px #ebf1f5,0 0 0px 12px #ebf1f5 inset;
+  margin: 6px 0;
+}
+.butn-filter {
+  position: fixed;
+  right: 1rem;
+  bottom: 1rem;
+  z-index: 99;
+}
+.butn-filter img {
+  width: 2.35rem;
+}
+.buy-header {
+  position: relative;
+  width: 100%;
+  height: 7.65rem;
+  background: url("../img/bg-gushou-buy.png") top center no-repeat;
+  background-size: 100% auto;
+  padding: 1.25rem 1rem .75rem;
+}
+.buy-header .percentage-line {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: .15rem;
+  background-color: #90d4ff;
+}
+.buy-header .percent {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 30%;
+  height: 100%;
+  background-color: #3fadf2;
+}
+.buy-header .percentage {
+  width: 3.3rem;
+  height: 3.3rem;
+  border: .1rem solid #dcdcdc;
+  border-top: .1rem solid #4fa6dd;
+  border-left: .1rem solid #4fa6dd;
+}
+.buy-header .percentage-value {
+  font-size: 1.25rem;
+  line-height: 1;
+}
+.project-cycle {
+  background-color: #fff;
+  padding: .75rem 1rem 1rem;
+}
+.project-cycle .caption {
+  font-size: .7rem;
+}
+.project-cycle .legend {
+  margin-top: 1.25rem;
+  text-align: center;
+}
+.project-cycle .legend .line {
+  display: inline-block;
+  width: 4rem;
+  height: 1px;
+  background-color: #af294d;
+  margin: 0 .2rem;
+  vertical-align: middle;
+}
+.buy-header .row,
+.project-cycle .row,
+.buy-confirm-header .row {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: start;
+  -ms-flex-pack: start;
+  -webkit-justify-content: flex-start;
+  justify-content: flex-start;
+  -webkit-box-align: baseline;
+  -ms-flex-align: baseline;
+  -webkit-align-items: baseline;
+  align-items: baseline;
+  margin-left: 0;
+}
+.buy-header .row .prop-name,
+.project-cycle .row .prop-name,
+.buy-confirm-header .row .prop-name,
+.buy-header .row .prop-value,
+.project-cycle .row .prop-value,
+.buy-confirm-header .row .prop-value {
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  color: #888;
+  font-size: .6rem;
+}
+.buy-header .row .product-rate,
+.project-cycle .row .product-rate,
+.buy-confirm-header .row .product-rate {
+  color: #af294d;
+}
+.buy-header .row .product-rate span,
+.project-cycle .row .product-rate span,
+.buy-confirm-header .row .product-rate span {
+  font-size: 2.5rem;
+}
+.buy-header .row .product-deadline,
+.project-cycle .row .product-deadline,
+.buy-confirm-header .row .product-deadline {
+  color: #333;
+}
+.buy-header .row .product-deadline span,
+.project-cycle .row .product-deadline span,
+.buy-confirm-header .row .product-deadline span {
+  font-size: 2rem;
+}
+.buy-header .row .product-amount,
+.project-cycle .row .product-amount,
+.buy-confirm-header .row .product-amount {
+  color: #555;
+  font-size: .7rem;
+}
+.buy-header .row .product-amount strong,
+.project-cycle .row .product-amount strong,
+.buy-confirm-header .row .product-amount strong {
+  color: #f59058;
+}
+.buy-header .row .blank,
+.project-cycle .row .blank,
+.buy-confirm-header .row .blank {
+  width: 3.4rem;
+}
+.buy-header .row:last-child,
+.project-cycle .row:last-child,
+.buy-confirm-header .row:last-child {
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
+}
+.project-cycle .row {
+  text-align: center;
+}
+.project-cycle .row .prop-name {
+  font-size: .65rem;
+  color: #333;
+  padding: .75rem 0;
+}
+.project-details .list-block,
+.popup-invest-list .list-block {
+  margin: .25rem 0;
+}
+.project-details .list-block .item-after,
+.popup-invest-list .list-block .item-after {
+  color: #888;
+}
+.project-details .list-block .item-title,
+.popup-invest-list .list-block .item-title {
+  font-size: .7rem;
+  color: #555;
+}
+.project-details .list-block .item-inner,
+.popup-invest-list .list-block .item-inner {
+  padding-right: 1.25rem;
+}
+.project-details .list-block .item-content,
+.popup-invest-list .list-block .item-content {
+  padding-left: 1.25rem;
+}
+.project-details .list-block .item-content:after,
+.popup-invest-list .list-block .item-content:after {
+  background-color: transparent;
+}
+.buy-footer {
+  background-color: #fff;
+  height: 2.5rem;
+}
+.buy-footer .col-33 {
+  margin: .5rem 0 !important;
+  height: 1.5rem;
+  line-height: 1.5rem;
+  position: relative;
+  text-align: center;
+  font-size: .7rem;
+}
+.buy-footer .col-33:after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 0;
+  left: auto;
+  bottom: auto;
+  width: 1px;
+  height: 100%;
+  background-color: #ccc;
+  display: block;
+  z-index: 15;
+  transform-origin: 100% 50%;
+}
+@media only screen and (-webkit-min-device-pixel-ratio: 2) {
+  .buy-footer .col-33:after {
+    transform: scaleX(0.5);
+  }
+}
+@media only screen and (-webkit-min-device-pixel-ratio: 3) {
+  .buy-footer .col-33:after {
+    transform: scaleX(0.33);
+  }
+}
+.buy-footer .col-33:last-child:after {
+  display: none;
+}
+.butn-box {
+  margin-top: .25rem;
+  position: relative;
+  padding: .5rem 0;
+  background-color: #fff;
+  width: 100%;
+}
+.butn-box:before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: auto;
+  right: auto;
+  height: 1px;
+  width: 100%;
+  background-color: #ccc;
+  display: block;
+  z-index: 15;
+  transform-origin: 50% 0%;
+}
+@media only screen and (-webkit-min-device-pixel-ratio: 2) {
+  .butn-box:before {
+    transform: scaleY(0.5);
+  }
+}
+@media only screen and (-webkit-min-device-pixel-ratio: 3) {
+  .butn-box:before {
+    transform: scaleY(0.33);
+  }
+}
+.butn-box p {
+  text-align: center;
+  margin: .75rem 0;
+  font-size: .7rem;
+}
+.butn-box p strong {
+  color: #f59058;
+}
+.butn-box input[type="button"] {
+  width: 15rem;
+  margin: 0 auto;
+}
+.butn-confirmpay {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+}
+.invest-input-box {
+  background-color: #fff;
+  padding: .75rem 1.25rem .85rem;
+  margin-bottom: .25rem;
+}
+.invest-input-box .row {
+  margin-left: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
+  font-size: .6rem;
+}
+.invest-input-box .row:nth-child(2) {
+  margin: .5rem 0 .85rem;
+  font-size: 1.25rem;
+}
+.invest-input-box a {
+  width: 15rem;
+  margin: 0 auto;
+}
+.buy-confirm-header {
+  position: relative;
+  width: 100%;
+  height: 11rem;
+  background: url("../img/bg-buy-confirm.png") top center no-repeat;
+  background-size: 100% auto;
+  padding: 1.25rem 0 .75rem;
+}
+.buy-confirm-header .order-number {
+  padding-left: 1rem;
+  font-size: .7rem;
+}
+.buy-confirm-header .row .product-rate span {
+  font-size: 1.7rem;
+}
+.buy-confirm-header .row .product-deadline span,
+.buy-confirm-header .row .product-profit span {
+  font-size: 1.25rem;
+  color: #333;
+}
+.buy-confirm-header .row .blank {
+  width: 2.4rem;
+}
+.buy-confirm-header .row .col-33 {
+  background: url("../img/bg-dotted.png") top center no-repeat;
+  background-size: 100% 100%;
+  margin-right: .3rem;
+  background-color: rgba(255, 255, 255, 0.6);
+  text-align: center;
+  border-radius: .25rem;
+  border: 1px dash #4fa6dd;
+  padding: .5rem 0;
+}
+.buy-confirm-header .row .col-33 .prop-name {
+  color: #333;
+  font-size: .65rem;
+  margin-bottom: .5rem;
+}
+.buy-confirm-header .row .col-33 .prop-value {
+  font-size: .65rem;
+}
+.buy-confirm-header .row .col-33:last-child {
+  margin-right: 0;
+}
+.buy-confirm-header .row:last-child {
+  padding: 0 .5rem;
+}
+.buy-confirm-header .row-name {
+  font-size: .55rem;
+  padding: 1rem 1rem .5rem;
+}
+.buy-confirm-header .row-value {
+  padding: 0 1rem 1.5rem;
+}

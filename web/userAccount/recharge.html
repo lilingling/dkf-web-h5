@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>充值</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no" />
+    <link rel="stylesheet" href="../../css/sm.css">
+    <link rel="stylesheet" href="../../css/sm-extend.css">
+    <link rel="stylesheet" href="../../css/userAccount.css">
+    <style>
+    [v-cloak] {
+        display: none;
+    }
+    </style>
+</head>
+
+<body>
+    <div class="page-group">
+        <div class="page page-current">
+            <div class="content recharge" id="rechargeForm">
+                <validator name="validation">
+                    <form novalidate>
+                        <div class="bank-card" v-cloak>
+                            <div class="card-logo">
+                                <img :src="bankInfo.bankIcon" alt="" id="bank_img">
+                                <label class="jcard-name">{{bankInfo.bankName}}</label>
+                            </div>
+                            <div class="card-num">
+                                <img src="../../img/card_logo2@2x.png" alt="" class="">
+                                <span class="jcard-num">{{bankInfo.cardNumber}}</span>
+                            </div>
+                            <div class="card-info">
+                                <label class="jcard-username">账户名: <span>{{bankInfo.userRealName}}</span></label>
+                                <label class="card-limit">限额:<span>5万元/笔</span><span>10万元/月</span></label>
+                            </div>
+                        </div>
+                        <div class="recharge-inputbox">
+                            <label class="prop-name">充值金额（元）</label>
+                            <input type="tel" class="input-recharge" placeholder="0.00" id="recharge_money" v-model="applyRealNamePayModel.data.rechargeMoney" v-validate:recharge_money="['required']">
+                        </div>
+                        <input type="button" value="立即充值" class="button button-fill jbutn-recharge" :disabled="$validation.invalid" v-on:click="toRecharge">
+                        <div class="checkbox agreement">
+                            <input type="checkbox" name="agreement" id="agreement" checked="checked" v-validate:agreement="['required']">
+                            <label for="agreement"></label>
+                            <p>我已阅读并同意<a href="../content/agreement_tonglian.html" class="external">《通联支付代扣协议》</a></p>
+                        </div>
+                        <div class="dealpwd-mask mask-grey">
+                            <div class="dealpwd-box my-modal">
+                                <div class="dealpwd-title">
+                                    <div class="jclose">
+                                        <div class="line left-line"></div>
+                                        <div class="line right-line"></div>
+                                    </div>
+                                    <label>请输入交易密码</label>
+                                </div>
+                                <div class="dealpwd-content">
+                                    <label class="prop-name">充值金额（元）</label>
+                                    <label class="prop-value"></label>
+                                    <div class="input-box">
+                                        <div class="inner-box">
+                                            <input type="password" readonly="">
+                                        </div>
+                                        <div class="inner-box">
+                                            <input type="password" readonly="">
+                                        </div>
+                                        <div class="inner-box">
+                                            <input type="password" readonly="">
+                                        </div>
+                                        <div class="inner-box">
+                                            <input type="password" readonly="">
+                                        </div>
+                                        <div class="inner-box">
+                                            <input type="password" readonly="">
+                                        </div>
+                                        <div class="inner-box">
+                                            <input type="password" readonly="">
+                                        </div>
+                                        <input type="tel" class="pwd-input" id="pwd-input">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="realNamePay-mask mask-grey ">
+                            <div class="realNamePay-box my-modal">
+                                <div class="realNamePay-content">
+                                    <img src="../../img/card_icon@2x.png" alt="">
+                                    <p>尊敬的用户，您正在通过通联支付开通银行卡代扣支付功能。</p>
+                                    <div class="phoneNum-row">
+                                        <label>预留手机号</label>
+                                        <label>18611745835</label>
+                                    </div>
+                                    <div class="verifiyCode-row">
+                                        <label>短信验证码:</label>
+                                        <div class="input-box">
+                                            <div class="inner-box">
+                                                <input type="password" readonly="readonly">
+                                            </div>
+                                            <div class="inner-box">
+                                                <input type="password" readonly="readonly">
+                                            </div>
+                                            <div class="inner-box">
+                                                <input type="password" readonly="readonly">
+                                            </div>
+                                            <div class="inner-box">
+                                                <input type="password" readonly="readonly">
+                                            </div>
+                                            <div class="inner-box">
+                                                <input type="password" readonly="readonly">
+                                            </div>
+                                            <div class="inner-box">
+                                                <input type="password" readonly="readonly">
+                                            </div>
+                                            <input type="tel" id="pwd_input1" readonly="readonly">
+                                        </div>
+                                    </div>
+                                    <p class="secondSend-tips">没收到验证码？<a href="">再次发送</a></p>
+                                </div>
+                                <div class="realNamePay-button">确定</div>
+                            </div>
+                        </div>
+                    </form>
+                </validator>
+                <p class="recharge-tips">预计1分钟到账，以实际到账时间为准</p>
+            </div>
+        </div>
+    </div>
+</body>
+<script type='text/javascript' src='../../js/lib.min.js' charset='utf-8'></script>
+<script type='text/javascript' src='../../js/base.js' charset='utf-8'></script>
+<script>
+$(function() {
+    var url = 'http://192.168.1.220:8080/dkf-web/';
+    var publickey, pwdModal, dealPwd;
+    var vm = new Vue({
+        el: '#rechargeForm',
+        data: {
+            bankInfo: '',
+            applyRealNamePayModel: {
+                platform: "2",
+                data: {
+                    payPassword: '',
+                    rechargeMoney: ''
+                }
+            },
+            realNamePayModel: {
+                platform: "2",
+                data: {
+                    payPassword: '',
+                    rechargeMoney: '',
+                    vercode: '9999',
+                    smsStatus: 2,
+
+                }
+            }
+
+        },
+        methods: {
+            initData: function() {
+                var _self = this;
+                $.ajax({
+                    url: url + 'userRealNamePayOne/applyToQueryRealNamePayInfo',
+                    type: 'POST',
+                    data: JSON.stringify({
+                        platform: '2'
+                    }),
+                    success: function(res) {
+                        if (res.state == 0) {
+                            _self.bankInfo = res.data;
+                        } else {
+                            $.toast(res.msg);
+                        }
+                    },
+                    error: _self.requestError
+                })
+            },
+            propPwdBox: function() {
+                new base.KeyBoard(recharge_money);
+                setTimeout(function() {
+                    $('#table_keyboard').addClass('active');
+                }, 200)
+            },
+            toRecharge: function() {
+                var rechargeMoney = $('#recharge_money').val();
+                $('.dealpwd-content .prop-value').text(rechargeMoney);
+
+                $('.dealpwd-mask').addClass('active');
+                $('.dealpwd-title').on('tap', function() {
+                    $('.dealpwd-mask').removeClass('active');
+                })
+
+                var $input = $(".inner-box input");
+                $("body").on("input", '#pwd-input', function() {
+                    dealPwd = $(this).val().trim();
+
+                    var len = dealPwd.length;
+                    if (len == 6) {
+                        $('.dealpwd-mask').removeClass('active');
+                        //处理逻辑
+                        if (vm.bankInfo.isRealPayApplied == 0) {
+                            // 未申请实名付
+                            vm.applyRealNamePay();
+
+                        } else if (vm.bankInfo.isRealPayApplied == 1) {
+                            // 已申请实名付
+                            vm.realNamePay();
+
+                        }
+                    }
+                    for (var i = 0, len = dealPwd.length; i < len; i++) {
+                        $input.eq(i).val(dealPwd[i]);
+                    }
+                    $input.each(function(index) {
+                        if (index >= len) {
+                            $(this).val("");
+                        }
+                    });
+
+                });
+
+            },
+            applyRealNamePay: function() {
+                var _self = this;
+                console.log(dealPwd);
+                this.applyRealNamePayModel.data.payPassword = base.encrypt(dealPwd, publickey);
+                $.ajax({
+                    url: url + 'userRealNamePayOne/applicationRealNamePay',
+                    type: 'POST',
+                    data: JSON.stringify(_self.applyRealNamePayModel),
+                    success: function(res) {
+                        if (res.state == 0) {
+                            // 是否通联下发短信
+                            if (res.data.status == '1' || res.data.status == '104') {
+                                // 绑定实名付弹窗
+                                $('.realNamePay-mask').addClass('active');
+
+                                _self.sendSms();
+                            } else if (res.data.status == '106') {
+                                _self.realNamePay();
+                            }
+
+                        } else {
+                            $.toast(res.msg);
+                        }
+                    },
+                    error: _self.requestError
+                })
+            },
+            realNamePay: function() {
+                var _self = this;
+                this.realNamePayModel.data.rechargeMoney = $('#recharge_money').val();
+                this.realNamePayModel.data.payPassword = base.encrypt(dealPwd, publickey);
+                $.ajax({
+                    url: url + 'userRealnamePayAppTwo/realnamePaySingle',
+                    type: 'POST',
+                    data: JSON.stringify(_self.realNamePayModel),
+                    success: function(res) {
+                        if (res.state == 0) {
+                            alert('实名付成功');
+
+                        } else {
+                            $.toast(res.msg);
+                        }
+                    },
+                    error: _self.requestError
+                })
+            },
+            sendSms: function() {
+                var _self = this;
+                $.ajax({
+                    url: url + 'userRealnamePayAppTwo/reApply',
+                    type: 'POST',
+                    data: JSON.stringify({
+                        platform: '2'
+                    }),
+                    success: function(res) {
+                        if (res.state == 0) {
+                            _self.realNamePay();
+
+                        } else {
+                            $.toast(res.msg);
+                        }
+                    },
+                    error: _self.requestError
+                })
+            },
+
+            requestError: function(xhr, errorType, error) {
+                $.toast(xhr.responseText);
+            }
+
+        },
+        ready: function() {
+            this.initData();
+        }
+    });
+
+    $('body').on('tap', '.dealpassword-alert-title', function() {
+        $.closeModal(pwdModal);
+    });
+
+
+    // 获取公钥
+    (function(operationType) {
+        $.ajax({
+            url: url + 'getPublicKey',
+            type: 'POST',
+            contentType: 'application/json; charset=UTF-8',
+            xhrFields: {
+                withCredentials: true
+            },
+            data: JSON.stringify({
+                platform: 2,
+                operationType: operationType,
+                position: {
+                    latitude: 42.4996330000,
+                    longitude: 120.4565540000
+                }
+            }),
+            success: function(data) {
+                publickey = data.data;
+            }
+        });
+    }(4));
+
+//     var realnameModal = $.modal({
+//     text: '<div class="realname-alert-content">' + '<div class="jclose">' + '<div class="left-line line"></div>' + '<div class="right-line line"></div>' + '</div>' + '<img src="../../img/card_icon@2x.png" class="">' + '<p>尊敬的用户，您正在通过通联支付开通银行卡代扣支付功能。</p>' + '<div class="phoneNum-row">' + '<label>预留手机号:</label>' + '<label>18511745835</label>' + '</div>' + '<div class="verifiyCode-row">' + '<label>短信验证码:</label>' + '<div class="input-box">' + '<div class="inner-box"><input type="password" readonly="readonly" /></div>' + '<div class="inner-box"><input type="password" readonly="readonly" /></div>' + '<div class="inner-box"><input type="password" readonly="readonly" /></div>' + '<div class="inner-box"><input type="password" readonly="readonly" /></div>' + '<div class="inner-box"><input type="password" readonly="readonly" /></div>' + '<div class="inner-box"><input type="password" readonly="readonly" /></div>' + '<input type="tel" id="pwd_input1" readonly="readonly"/>' + '</div>' + '</div>' + '<p class="secondSend-tips">' + '没收到验证码？<a href="">再次发送</a>' + '</p>' + '</div>',
+//     buttons: [{
+//         text: '确定',
+//         onClick: function() {}
+//     }]
+
+// });
+
+});
+</script>
+
+</html>

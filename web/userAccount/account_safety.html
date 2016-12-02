@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>账户安全</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="stylesheet" href="../../css/sm.css">
+    <link rel="stylesheet" href="../../css/sm-extend.css">
+    <link rel="stylesheet" href="../../css/userAccount.css">
+</head>
+
+<body>
+    <div class="page-group" >
+        <div class="page page-current">
+            <div class="content">
+                <div class="safety-rank-box">
+                    <div class="safety-rank">
+                        <img src="../../img/pointer.png" alt="" class="anim-pointer">
+                    </div>
+                    <p class="prop-name">安全等级</p>
+                    <p class="prop-value">高</p>
+                </div>
+                <div class="safety-content">
+                    <div class="list-block" style="margin:.25rem 0">
+                        <ul>
+                            <li class="item-content item-link">
+                                <div class="item-inner">
+                                    <div class="item-title">实名认证</div>
+                                    <div class="item-after" style="color:#dd5e18">未认证</div>
+                                </div>
+                            </li>
+                            <li class="item-content item-link">
+                                <a class="item-inner" href="#setTradePwd_form"  @click="getPublickey(4)">
+                                    <div class="item-title">交易密码</div>
+                                    <div class="item-after">未设置</div>
+                                </a>
+                            </li>
+                            <li class="item-content item-link">
+                                <a class="item-inner open-loginPwd-options"">
+                                    <div class="item-title">登录密码</div>
+                                    <div class="item-after">未设置</div>
+                                </a>
+                            </li>
+                            <li class="item-content item-link">
+                                <a class="item-inner" href="risk_assess.html">
+                                    <div class="item-title">风险评估</div>
+                                    <div class="item-after">未评估</div>
+                                </a>
+                            </li>
+                            <li class="item-content item-link">
+                                <div class="item-inner">
+                                    <div class="item-title">手机号码</div>
+                                    <div class="item-after">修改</div>
+                                </div>
+                            </li>
+                            <li class="item-content item-link">
+                                <div class="item-inner">
+                                    <div class="item-title">绑定邮箱</div>
+                                    <div class="item-after">未绑定</div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <validator name="setTradePwd_form">
+            <form novalidate>
+                <div class="page" id="setTradePwd_form">
+                    <div class="content pd20 bg-white">
+                        <div class="list-block">
+                            <ul>
+                                <li>
+                                    <div class="item-content">
+                                        <div class="item-inner">
+                                            <div class="item-input">
+                                                <input type="password" placeholder="请输入您的交易密码" id="tradepwd" v-validate:tradepwd="['passw']" @invalid="passwInvalid" initial="off" detect-change="off" v-model="password1">
+                                                <input type="hidden" v-model="setPwdModel.data.payPassword">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="item-content">
+                                        <div class="item-inner">
+                                            <div class="item-input">
+                                                <input type="password" placeholder="请再次输入您的交易密码" id="tradepwd1" v-validate:tradepwd1="['required']" v-on:blur="checkPassword" v-model="password2">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <input type="button" value="确认提交" class="button button-fill" :disabled="!$setTradePwd_form.valid" v-on:click="setPassword">
+                    </div>
+                </div>
+            </form>
+        </validator>
+
+        <validator name="validation1">
+            <form novalidate>
+                <div class="page" id="updatePsw1">
+                    <div class="content pd20 bg-white">
+                        <div class="list-block">
+                            <ul>
+                                <li>
+                                    <div class="item-content">
+                                        <div class="item-inner">
+                                            <div class="item-input">
+                                                <input type="password" placeholder="请输入您的原密码" id="loginpassword" v-validate:loginpassword="['passw']" @invalid="passwInvalid" initial="off" detect-change="off">
+                                                <input type="hidden" v-model="updatePwdModel1.data.password">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="item-content">
+                                        <div class="item-inner">
+                                            <div class="item-input">
+                                                <input type="password" placeholder="请输入您的新密码" id="loginpassword1" v-validate:loginpassword1="['passw']" @invalid="passwInvalid" initial="off" detect-change="off" v-model="password1">
+                                                <input type="hidden" v-model="updatePwdModel1.password">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="item-content">
+                                        <div class="item-inner">
+                                            <div class="item-input">
+                                                <input type="password" placeholder="请再次输入您的新密码" id="loginpassword2" v-validate:loginpassword2="['required']" v-on:blur="checkPassword" v-model="password2">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <input type="button" value="确认提交" class="button button-fill" :disabled="!$validation1.valid" v-on:click="updateLoginPwd">
+                    </div>
+                </div>
+            </form>
+        </validator>
+
+        <validator name="validation2">
+            <form novalidate>
+                <div class="page" id="updatePsw2">
+                    <div class="content pd20 bg-white">
+                        <div class="list-block">
+                            <ul>
+                                <li>
+                                    <div class="item-content">
+                                        <div class="item-inner">
+                                            <div class="item-input">
+                                                <input type="password" placeholder="请输入您的原密码" id="tradepassword" v-validate:tradepassword="['passw']" @invalid="passwInvalid" initial="off" detect-change="off">
+                                                <input type="hidden" v-model="updatePwdModel2.data.payPassword">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="item-content">
+                                        <div class="item-inner">
+                                            <div class="item-input">
+                                                <input type="password" placeholder="请输入您的新密码" id="tradepassword1" v-validate:tradepassword1="['passw']" @invalid="passwInvalid" initial="off" detect-change="off" v-model="password1">
+                                                <input type="hidden" v-model="updatePwdModel2.password">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="item-content">
+                                        <div class="item-inner">
+                                            <div class="item-input">
+                                                <input type="password" placeholder="请再次输入您的新密码" id="tradepassword2" v-validate:tradepassword2="['required']" v-on:blur="checkPassword" v-model="password2">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <input type="button" value="确认提交" class="button button-fill" :disabled="!$validation2.valid" v-on:click="updateTradePwd">
+                    </div>
+                </div>
+            </form>
+        </validator>
+    </div>
+    <div class="popup tradePassword-options">
+        <div class="popup-list">
+            <ul>
+                <li><a href="#updatePsw2" @click="getPublickey(6)">修改交易密码</a></li>
+                <li><a href="findTradePassword.html" class="external">忘记交易密码</a></li>
+            </ul>
+            <ul>
+                <li class="close-popup">取消</li>
+            </ul>
+        </div>
+    </div>
+    <div class="popup loginPassword-options">
+    <div class="popup-list">
+        <ul>
+            <li><a href="#updatePsw1" @click="getPublickey(5)">修改登录密码</a></li>
+            <li><a href="../user/findPassword.html" class="external">忘记登录密码</a></li>
+        </ul>
+        <ul>
+            <li class="close-popup">取消</li>
+        </ul>
+    </div>
+</div>
+    <script type='text/javascript' src='../../js/lib.min.js' charset='utf-8'></script>
+    <script type='text/javascript' src='../../js/base.js' charset='utf-8'></script>
+    <script>
+
+    $(function() {
+        var url = 'http://192.168.1.220:8080/dkf-web/';
+        var pwdValue, pwdValue2,publickey;
+        var isPass = false;
+
+        new Vue({
+            el: 'body',
+            data: {
+                password1:'',
+                password2:'',
+                setPwdModel: {
+                    platform: '2',
+                    data: {
+                        payPassword: ''
+                    },
+                    position: {
+                        latitude: 42.4996330000,
+                        longitude: 120.4565540000
+                    }
+                },
+                updatePwdModel1: {
+                    platform: '2',
+                    data: {
+                        password: ''
+                    },
+                    password: '',
+                    position: {
+                        latitude: 42.4996330000,
+                        longitude: 120.4565540000
+                    }
+                },
+                updatePwdModel2: {
+                    platform: '2',
+                    data: {
+                        payPassword: ''
+                    },
+                    password: '',
+                    position: {
+                        latitude: 42.4996330000,
+                        longitude: 120.4565540000
+                    }
+                }
+            },
+            methods: {
+                passwInvalid() {
+                    $.toast('密码请输入6-16位字符');
+                    isPass = false;
+                    return false
+                },
+                checkPassword() {
+                    if (this.password1 != this.password2) {
+                        $.toast('密码不一致，请确认');
+                        isPass = false;
+                        return false
+                    }
+                    else {
+                        isPass = true;
+                        var _self = this;
+                    }
+                },
+                setPassword:function() {
+                    this.checkPassword();
+                    var _self = this;
+                    if (isPass) {
+                        pwdValue = $('#tradepwd').val();
+                        _self.setPwdModel.data.payPassword = base.encrypt(pwdValue, publickey);
+                        $.ajax({
+                            url: url + 'user/setTradePassword',
+                            type: 'POST',
+                            data: JSON.stringify(_self.setPwdModel),
+                            success: function(data) {
+                                if(data.state == 0) {
+                                    $.toast('设置交易密码成功');
+                                }
+                                else {
+                                    $.toast(data.msg);
+                                }
+                            },
+                            error: _self.requestError
+                        });
+                     }
+
+                },
+                updateLoginPwd:function() {
+                     this.checkPassword();
+                     var _self = this;
+                     if (isPass) {
+                        pwdValue = $('#loginpassword').val();
+                        pwdValue1 = $('#loginpassword1').val();
+
+                        _self.updatePwdModel1.data.password = base.encrypt(pwdValue, publickey);
+                        _self.updatePwdModel1.password = base.encrypt(pwdValue1, publickey);
+
+                        $.ajax({
+                            url: url + 'user/resetPassword',
+                            type: 'POST',
+                            data: JSON.stringify(_self.updatePwdModel1),
+                            success: function(data) {
+                                if(data.state == 0) {
+                                    $.toast('修改登录密码成功');
+                                }
+                                else {
+                                    $.toast(data.msg);
+                                }
+                            },
+                            error: _self.requestError
+                        });
+                     }
+
+                },
+                updateTradePwd:function() {
+                     this.checkPassword();
+                     var _self = this;
+                     if (isPass) {
+                        pwdValue = $('#tradepassword').val();
+                        pwdValue1 = $('#tradepassword1').val();
+
+                        _self.updatePwdModel2.data.payPassword = base.encrypt(pwdValue, publickey);
+                        _self.updatePwdModel2.password = base.encrypt(pwdValue1, publickey);
+
+                        $.ajax({
+                            url: url + 'user/resetTradePassword',
+                            type: 'POST',
+                            data: JSON.stringify(_self.updatePwdModel2),
+                            success: function(data) {
+                                if(data.state == 0) {
+                                    $.toast('修改交易密码成功');
+                                }
+                                else {
+                                    $.toast(data.msg);
+                                }
+                            },
+                            error: _self.requestError
+                        });
+                     }
+
+                },
+                getPublickey:function(operationType) {
+                    var data = {
+                        'platform': '2',
+                        'operationType': operationType,
+                        'position': {
+                            'latitude': 42.4996330000,
+                            'longitude': 120.4565540000
+                        }
+                    };
+                    $.ajax({
+                        url: url + 'getPublicKey',
+                        type: 'POST',
+                        contentType: 'application/json; charset=UTF-8',
+                        xhrFields: {
+                            withCredentials: true
+                        },
+                        data: JSON.stringify(data),
+                        success: function(data) {
+                            publickey = data.data;
+                        }
+                    });
+                },
+                requestError: function(xhr, errorType, error) {
+                    $.toast(xhr.responseText);
+                }
+
+            }
+        });
+
+
+        // 点击设置密码popup
+        $(document).on('click', '.open-tradePwd-options', function() {
+            $.popup('.tradePassword-options');
+        });
+        $(document).on('click', '.open-loginPwd-options', function() {
+            $.popup('.loginPassword-options');
+        });
+    })
+
+    </script>
+</body>
+
+</html>

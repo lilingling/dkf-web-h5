@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>我的银行卡</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="stylesheet" href="../../css/sm.css">
+    <link rel="stylesheet" href="../../css/userAccount.css">
+    <style>
+        [v-cloak] {display: none;}
+    </style>
+</head>
+
+<body>
+    <div class="page-group bankcard-detail" id="bankCard">
+        <div class="page page-current">
+            <div class="content">
+                <div class="bank-card" v-if="isBindCard" v-cloak>
+                    <div class="card-logo">
+                        <img :src="bankInfo.bankIcon" alt="" id="bank_img">
+                        <label class="jcard-name">{{bankInfo.dictionaryBank.bankName}}</label>
+                    </div>
+                    <div class="card-num">
+                        <img src="../../img/card_logo2@2x.png" alt="" class="">
+                        <span class="jcard-num">{{bankInfo.encryptBankAccount}}</span>
+                    </div>
+                    <div class="card-info">
+                        <label class="jcard-username">账户名: <span>{{bankInfo.user.realName}}</span></label>
+                        <label class="card-limit">限额:<span>5万元/笔</span><span>10万元/月</span></label>
+                    </div>
+                </div>
+                <div class="bank-card" v-else="isBindCard">
+                    <a class="icon1 icon-addbank" href="#addBank1"></a>
+                    <p>添加银行卡</p>
+                </div>
+                <div class="extra-info pd70" style="width:100%">
+                    <p>道口财富只能绑定一张与您实名信息相符的银行卡当前暂不支持在线解绑。</p>
+                    <p>更多问题请联系客服：<span>400-650-9536</span></p>
+                </div>
+            </div>
+        </div>
+        <div class="page" id="addBank1">
+            <validator name="validation1">
+                <form novalidate>
+                    <div class="content pd70 bg-white">
+                        <div class="list-block">
+                            <ul>
+                                <li>
+                                    <div class="item-content">
+                                        <div class="item-inner" style="padding-left:.25rem">
+                                            <div class="item-input row no-gutter">
+                                                <div class="col-20">
+                                                    <label id="realname">李玲玲</label>
+                                                </div>
+                                                <div class="col-80 text-center">
+                                                    <label id="idnumber">13112719910730436X</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="item-media"><i class="icon1 icon-identity"></i></div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="item-content">
+                                        <div class="item-inner">
+                                            <div class="item-input">
+                                                <input type="text" placeholder="请选择银行" id="bankname" v-model="bankname">
+                                            </div>
+                                        </div>
+                                        <div class="item-media"><img :src="bankImgUrl" alt="" style="width:1.45rem;"></div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="item-content">
+                                        <div class="item-inner">
+                                            <div class="item-input">
+                                                <input type="tel" placeholder="请输入银行卡号" id="cardnumber" v-validate:cardnumber="['required']">
+                                                <input type="hidden" v-model="addbankModel.data.bankCardNo">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <a href="#addBank2" v-if="$validation1.valid" class="button button-fill">确认</a>
+                        <a v-else="!$validation1.valid" class="button button-fill disabled">确认</a>
+                        <div class="extra-info">
+                            <p>道口财富只能绑定一张与您实名信息相符的银行卡当前暂不支持在线解绑。</p>
+                            <p>更多问题请联系客服：<span>400-650-9536</span></p>
+                        </div>
+                    </div>
+                </form>
+            </validator>
+        </div>
+        <div class="page" id="addBank2">
+            <validator name="validation2">
+                <form novalidate>
+                    <div class="content pd70 bg-white">
+                        <div class="list-block">
+                            <ul>
+                                <li>
+                                    <div class="item-content">
+                                        <div class="item-inner">
+                                            <div class="item-input">
+                                                <input type="text" placeholder="请输入手机号" id="userphone"  v-validate:userphone="['phone']" @invalid="phoneInvalid"  initial="off" detect-change="off" v-model="addbankModel.phoneCode.phone">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                <div class="item-content">
+                                    <div class="item-inner">
+                                        <div class="item-input row no-gutter">
+                                            <div class="col-80">
+                                                <input type="text" placeholder="请输入您的验证码" id="captcha" class="col-80" v-validate:captcha="['required']" v-model="addbankModel.preposeToken">
+                                            </div>
+                                            <div class="col-20">
+                                                <label><img id="flash" src="http://192.168.1.220:8080/dkf-web/captcha.svl" onclick="this.src='http://192.168.1.220:8080/dkf-web/captcha.svl?d='+new Date().getTime()" title="验证码" style="cursor: pointer;width:100%;" /></label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                                <li>
+                                    <div class="item-content">
+                                        <div class="item-inner">
+                                            <div class="item-input">
+                                                <input type="tel" placeholder="请输入您的手机验证码" id="phonecode" v-validate:phonecode="{minlength:6,maxlength:6}" v-model="addbankModel.phoneCode.code">
+                                            </div>
+                                            <div class="item-media">
+                                                <input type="button" value="获取" class="j_get" v-on:click="sendSms" :disabled="!$validation1.userphone.valid">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <input type="button" value="确认提交" class="button button-fill" id="" :disabled="$validation2.invalid" v-on:click="addCard">
+                        <div class="extra-info">
+                            <p>道口财富只能绑定一张与您实名信息相符的银行卡当前暂不支持在线解绑。</p>
+                            <p>更多问题请联系客服：<span>400-650-9536</span></p>
+                        </div>
+                    </div>
+                </form>
+            </validator>
+        </div>
+    </div>
+    <script type='text/javascript' src='../../js/lib.min.js' charset='utf-8'></script>
+    <script type='text/javascript' src='../../js/base.js' charset='utf-8'></script>
+    <script>
+    $(function() {
+        var url = 'http://192.168.1.220:8080/dkf-web/';
+        var publickey,cardnumber;
+        new Vue({
+            el: '#bankCard',
+            data: {
+                bankInfo:'',
+                isBindCard: true,
+                bankname:'',
+                addbankModel:{
+                    preposeToken: '',
+                    platform:'2',
+                    operationType: 7,
+                    data: {
+                        bankCardNo:'',
+                        dictionaryBankId:208
+
+                      },
+                    phoneCode: {
+                        phone:'',
+                        code: ''
+                      }
+                }
+            },
+            computed:{
+                bankImgUrl:function() {
+                    switch(this.bankname) {
+                        case '中国工商银行':return '../../img/recharge_bank/gongshang@2x.png'
+                        break;
+                        case '中国光大银行':return '../../img/recharge_bank/guangda@2x.png'
+                        break;
+                        case '广发发展银行':return '../../img/recharge_bank/guangfa@2x.png'
+                        break;
+                    }
+                }
+            },
+            methods:{
+                phoneInvalid() {
+                    $.toast('手机格式不正确');
+                    return false;
+                },
+                initData:function() {
+                    var _self = this;
+                        $.ajax({
+                            url: url + 'bankAccount/cards',
+                            type: 'POST',
+                            data: {},
+                            success: function(res) {
+                                if (res.state == 0) {
+                                    _self.bankInfo = res.data[0];
+                                } else {
+                                    $.toast(res.msg);
+                                }
+                            },
+                            error: _self.requestError
+                        });
+                },
+                sendSms: function() {
+                    var _self = this;
+                        $.ajax({
+                            url: url + 'user/sendSmsCode',
+                            type: 'POST',
+                            data: JSON.stringify(_self.addbankModel),
+                            success: function(data) {
+                                if (data.state == 0) {
+                                    base.countDown($('.j_get'));
+                                    publickey = data.data;
+
+                                } else {
+                                    $.toast(data.msg);
+                                }
+
+                            },
+                            error: _self.requestError
+                        });
+                },
+                addCard:function() {
+                    var _self = this;
+                    cardnumber = $('#cardnumber').val();
+                    this.addbankModel.data.bankCardNo = base.rsaEncrypt(cardnumber, publickey)
+                        $.ajax({
+                            url: url + 'bankAccount/addCard',
+                            type: 'POST',
+                            data: JSON.stringify(_self.addbankModel),
+                            success: function(res) {
+                                if (res.state == 0) {
+                                   $.toast('绑卡成功');
+
+                                } else {
+                                    $.toast(res.msg);
+                                }
+
+                            },
+                            error: _self.requestError
+                        });
+                },
+                requestError: function(xhr, errorType, error) {
+                    $.toast(xhr.responseText);
+                }
+
+            },
+            ready:function() {
+                this.initData();
+            }
+
+        })
+        $("#bankname").picker({
+            toolbar: true,
+            cssClass: 'my-picker',
+            cols: [{
+                textAlign: 'center',
+                values: ['中国工商银行', '中国农业银行', '中国银行', '中国建设银行', '交通银行', '中信银行', '中国光大银行', '华夏银行', '中国民生银行', '广东发展银行', '招商银行',
+                    '兴业银行', '上海浦东发展银行', '中国邮政储蓄银行', '上海银行', '深圳平安银行'
+                ]
+            }]
+        });
+    })
+    </script>
+</body>
+
+</html>

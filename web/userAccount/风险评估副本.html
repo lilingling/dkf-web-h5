@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>账户安全-风险评估</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="stylesheet" href="../../css/sm.css">
+    <link rel="stylesheet" href="../../css/sm-extend.css">
+    <link rel="stylesheet" href="../../css/userAccount.css">
+    <style>
+
+    </style>
+</head>
+
+<body>
+    <div class="page-group">
+        <div class="page page-current">
+            <div class="content assess-cover bg-white" id="question">
+                <img src="../../img/assess-banner.jpg" alt="">
+                <p class="assess-tips"><strong>风险提示：</strong>理财产品可能获得比较高的投资收益，但也存在比较大的投资风险，请您根据自身的风险承受能力，审慎作出投资决定。</p>
+                <div class="cover-intro">
+                    <strong>尊敬的投资者：</strong>
+                    <br/> 为了便于您了解自身的风险承受能力，选择合适的投资产品和服务，请您填写以下风险承受能力评估问卷。下列问题可协助评估您对投资产品和服务的风险承受能力，请您根据自身情况认真选择。评估结果仅供参考，不构成投资建议。为了及时了解您的风险承受能力，我们建议您持续做好动态评估。我们承诺对您的所有个人资料保密。
+                </div>
+                <a class="button button-fill button-assess" href="#page2">评估</a>
+                <p class="assess-subtips">本次评估共12道题,耗时约3分钟</p>
+            </div>
+        </div>
+        <div class="page" id="page2">
+            <div class="content assess-box bg-white">
+                <div class="assess-title">
+            <span>本次评估共<strong>12</strong>道题</span><span>已答了<strong id="questionNum">0</strong>题</span>
+        </div>
+        <div id="questionnaire" class="questionnaire">
+            <h2><strong>1. </strong>请问您的年龄处于：</h2>
+            <ul>
+                <li @click="render()">
+                    <input type="radio" id="1A" class="butn-option" name="option" data-answer="A" data-role="none">
+                    <label >A. 18-30岁</label>
+
+                </li>
+                <li >
+                    <input type="radio" id="1B" class="butn-option" name="option" data-answer="B" data-role="none">
+                    <label >B. 31-40岁</label>
+
+                </li>
+                <li >
+                    <input type="radio" id="1C" class="butn-option" name="option" data-answer="C" data-role="none">
+                    <label >C. 41-50岁</label>
+
+                </li>
+                <li >
+                    <input type="radio" id="1D" class="butn-option" name="option" data-answer="D" data-role="none">
+                    <label >D. 51-60岁</label>
+
+                </li>
+                <li >
+                    <input type="radio" id="1E" class="butn-option" name="option" data-answer="E" data-role="none">
+                    <label >E. 60岁以上</label>
+
+                </li>
+            </ul>
+        </div>
+            </div>
+
+        </div>
+        <div class="page" id="page3">
+            <div class="content bg-white assess-result-box">
+                <div class="assess-result">
+                <div class="rate">
+                    <h1 id="assess-type">平衡型</h1>
+                    <p>您的风险承受评级</p>
+                </div>
+                <p>评估完成时间：<span>2016-10-1</span></p>
+                <p>评估失效时间：<span>2016-11-30</span></p>
+            </div>
+            <a class="button button-fill button-assess" id="re-assess" href="${pathWeb}/user/toAssessRisk.do">重新评估</a>
+            <p class="warmtips">温馨提示：今年您还可以重新评估<strong id="result-count">2</strong>次</p>
+            </div>
+
+        </div>
+    </div>
+    <script type='text/javascript' src='../../js/lib.min.js' charset='utf-8'></script>
+    <script type='text/javascript' src='../../js/base.js' charset='utf-8'></script>
+    <script type='text/javascript' src='../../js/question.json' charset='utf-8'></script>
+ <script>
+        $(function() {
+            var num =1;
+            new Vue({
+                el:'#question',
+                data:{
+                    question:''
+                },
+                methods:{
+                    render:function() {
+                        this.question = question[num];
+                    }
+                }
+            })
+
+
+
+
+
+
+
+
+
+
+
+        var num =1,
+                score = 0,
+                indxs =[];
+        $('#questionnaire').on('tap','ul li',function(){
+            var answer = $(this).find('input').data('answer');
+            $(this).find('input').attr('checked','checked');
+            var t = setTimeout(render,500);
+            if(indxs[num-1] == null){
+                indxs.push( $(this).index());
+            }
+            else{
+                indxs[num-1] =$(this).index();
+            }
+
+        });
+
+        $('#questionnaire').on('click','#butn-pre',function(){
+            num-=2;
+            render();
+            if(num == 1){
+                $('.butn-pre').addClass('hide');
+            }
+
+        });
+
+
+        var template = '';
+        var isChecked = false;
+
+        function render(){
+                $('#questionNum').html(num);
+
+            if(num==0 || num==1 || num ==2 || num==5){
+                template = '<h2><strong>'+(num+1)+'. </strong>'+question[num].title+'</h2>'
+                        +'<ul>'
+                        +'<li><input type="radio" id="'+(num+1)+'A" class="butn-option" name="option"  data-answer="A"><label >A. '+question[num].options[0]+'</label>'
+                        +'<li><input type="radio" id="'+(num+1)+'B" class="butn-option" name="option"  data-answer="B"><label >B. '+question[num].options[1]+'</label>'
+                        +'<li><input type="radio" id="'+(num+1)+'C" class="butn-option" name="option"  data-answer="C"><label >C. '+question[num].options[2]+'</label>'
+                        +'<li><input type="radio" id="'+(num+1)+'D" class="butn-option" name="option"  data-answer="D"><label >D. '+question[num].options[3]+'</label>'
+                        +'<li><input type="radio" id="'+(num+1)+'E" class="butn-option" name="option"  data-answer="E"><label >E. '+question[num].options[4]+'</label>'
+                        +'</ul>';
+            }
+            else if(num == 3 || num == 11){
+                template = '<h2><strong>'+(num+1)+'. </strong>'+question[num].title+'</h2>'
+                        +'<ul>'
+                        +'<li><input type="radio" id="'+(num+1)+'A" class="butn-option" name="option"  data-answer="A"><label >A. '+question[num].options[0]+'</label>'
+                        +'<li><input type="radio" id="'+(num+1)+'B" class="butn-option" name="option"  data-answer="B"><label >B. '+question[num].options[1]+'</label>'
+                        +'<li><input type="radio" id="'+(num+1)+'C" class="butn-option" name="option"  data-answer="C"><label >C. '+question[num].options[2]+'</label>'
+                        +'</ul>';
+            }
+            else if(num >= 12){
+                submitPaper();
+            }
+            else{
+                template = '<h2><strong>'+(num+1)+'. </strong>'+question[num].title+'</h2>'
+                        +'<ul>'
+                        +'<li><input type="radio" id="'+(num+1)+'A" class="butn-option" name="option"  data-answer="A"><label >A. '+question[num].options[0]+'</label>'
+                        +'<li><input type="radio" id="'+(num+1)+'B" class="butn-option" name="option"  data-answer="B"><label >B. '+question[num].options[1]+'</label>'
+                        +'<li><input type="radio" id="'+(num+1)+'C" class="butn-option" name="option"  data-answer="C"><label >C. '+question[num].options[2]+'</label>'
+                        +'<li><input type="radio" id="'+(num+1)+'D" class="butn-option" name="option"  data-answer="D"><label >D. '+question[num].options[3]+'</label>'
+                        +'</ul>';
+            }
+            console.log(indxs);
+
+            $('#questionnaire').html(template+'<a href="javascript:;" id="butn-pre" class="butn-pre">上一题</a>');
+            //放在布局之后
+            if(indxs[num] == null){
+                isChecked = false;
+            }
+            else{
+                $('#questionnaire ul li').eq(indxs[num]).find('input').prop('checked','checked');
+            }
+            num++;
+        };
+
+        // 提交问卷
+
+        function submitPaper () {
+            var answers = [];
+            for(var i = 0;i<indxs.length;i++){
+                var option ='';
+                switch (indxs[i]){
+                    case 0:option='A';
+                        break;
+                    case 1:option='B';
+                        break;
+                    case 2:option='C';
+                        break;
+                    case 3:option='D';
+                        break;
+                    case 4:option='E';
+                        break;
+
+                }
+                answers.push((i+1)+option);
+            }
+
+
+            if (answers.length < 12 ) {
+                alert("您还有题没回答哦~");
+                return;
+            } else {
+                var answerJson = {};
+                for (var i = 0; i < answers.length; i++) {
+                    answerJson[answers[i].substring(0,answers[i].length-1)] = answers[i].substring(answers[i].length-1,answers[i].length);
+
+                }
+                var s = "{answer:" + JSON.stringify(answerJson) + "," + "paperId:1}";
+
+                $.ajax({
+                    async: false,
+                    data: {
+//                      "answer": answerJson,
+//                      "paperId": "1"
+                        "requestJson": s
+//                      "requestJson": {"answer": answerJson, "paperId": "1"}
+                    },
+                    url: "${pathWeb}/evaluation/check.do",
+                    success: function (data) {
+                        location.assign('${pathWeb}/user/showAssessResult.do');
+                    }
+                });
+            }
+        }
+
+        // 评估剩余次数
+        var count = 3;
+            // var count = 3 - Number(${count}) < 0 ? 0 : 3 - Number(${count});
+            if (count <= 0) {
+                $("#re-assess").css({"background-color":"#e5c3c9"});
+                $("#re-assess").click(function(event){
+                    event.preventDefault();
+                });
+            }
+            $("#result-count").html(count);
+        })
+
+
+
+    </script>
+</body>
+
+</html>

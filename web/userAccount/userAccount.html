@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>我的账户</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="stylesheet" href="../../css/sm.css">
+    <link rel="stylesheet" href="../../css/sm-extend.css">
+    <link rel="stylesheet" href="../../css/userAccount.css">
+    <style>
+    [v-cloak] {
+        display: none;
+    }
+    </style>
+</head>
+
+<body>
+    <div class="page-group">
+        <div class="page page-current">
+            <div class="content" id="userAccount" v-cloak>
+                <div class="account-header">
+                    <div class="avatar-row">
+                        <div class="avatar">
+                            <a href="./account_extra_detail.html"><img src="../../img/avatar.png" alt="" ></a>
+                            <label class="profile">{{userAccountInfo.user.nickname}}</label>
+                        </div>
+                        <a href="../content/message.html" class="message icon icon-message external"></a>
+                    </div>
+                    <div class="amount-column">
+                        <div class="prop-name">总资产（元）<i class="icon icon-account-eye open" id="icon_eye"></i></div>
+                        <input type="text" class="prop-value pwd" value="{{userAccountInfo.totalFund}}">
+                    </div>
+                    <div class="amount-details">
+                        <i class="icon icon-account-detail"></i><a href="account_detail.html" class="external">查看账户详情</a><i class="icon icon-arrow"></i>
+                    </div>
+                    <div class="animate-bg">
+                        <img src="../../img/left.png" alt="" class="wave-left">
+                        <img src="../../img/right.png" alt="" class="wave-right">
+                    </div>
+                </div>
+                <div class="account-content">
+                    <div class="row no-gutter my-money mb10">
+                        <div class="col-50 ">
+                            <label class="prop-name">可用余额（元）</label>
+                            <label class="prop-value">{{userAccountInfo.balanceFund}}</label>
+                        </div>
+                        <div class="col-50">
+                            <a href="withdraw.html" class="button external">提现</a>
+                            <a href="recharge.html" class="button button-fill external">充值</a>
+                        </div>
+                    </div>
+                    <div class="my-asset">
+                        <div class="row no-gutter">
+                            <div class="col-33">
+                                <div>
+                                    <i class="icon icon-asset icon-asset-coupon"></i>
+                                    <label>优惠券</label>
+                                </div>
+                                <label class="number">{{userAccountInfo.couponNum}}</label>
+                            </div>
+                            <a class="col-33 external" href="bankcard_detail.html">
+                                <div>
+                                    <i class="icon icon-asset icon-asset-bank"></i>
+                                    <label>银行卡</label>
+                                </div>
+                                <label class="number">{{userAccountInfo.cardNum}}</label>
+                            </a>
+                            <div class="col-33">
+                                <div>
+                                    <i class="icon icon-asset icon-asset-point"></i>
+                                    <label>积分</label>
+                                </div>
+                                <label class="number">{{userAccountInfo.user.point}}</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="list-block" style="margin:.25rem 0;">
+                        <ul>
+                            <li class="item-content item-link">
+                                <div class="item-media"><i class="icon icon-account icon-account-gushou"></i></div>
+                                <a class="item-inner external" href="finance.html">
+                                    <div class="item-title">我的理财</div>
+                                    <div class="item-after">详情</div>
+                                </a>
+                            </li>
+                            <li class="item-content item-link" style="margin-bottom:.25rem">
+                                <div class="item-media"><i class="icon icon-account icon-account-jijin"></i></div>
+                                <div class="item-inner">
+                                    <div class="item-title">基金账户</div>
+                                    <div class="item-after">详情</div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="list-block" style="margin-top:.25rem;">
+                        <ul>
+                            <li class="item-content item-link">
+                                <div class="item-media"><i class="icon icon-account icon-account-safe"></i></div>
+                                <a href="account_safety.html" class="item-inner external">
+                                    <div class="item-title">账户安全</div>
+                                    <div class="item-after">详情</div>
+                                </a>
+                            </li>
+                            <li class="item-content item-link">
+                                <div class="item-media"><i class="icon icon-form icon-form-inviteCode"></i></div>
+                                <a href="account_more.html" class="item-inner">
+                                    <div class="item-title">邀请好友</div>
+                                </a>
+                            </li>
+                            <li class="item-content item-link">
+                                <div class="item-media"><i class="icon icon-account icon-account-more"></i></div>
+                                <a href="account_more.html" class="item-inner">
+                                    <div class="item-title">更多</div>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type='text/javascript' src='../../js/lib.min.js' charset='utf-8'></script>
+    <script type='text/javascript' src='../../js/base.js' charset='utf-8'></script>
+    <script>
+    $(function() {
+        var url = 'http://192.168.1.220:8080/dkf-web/';
+        var vm = new Vue({
+            el: '#userAccount',
+            data: {
+                userAccountInfo:''
+            },
+            methods: {
+                initData: function() {
+                    var _self = this;
+                    $.ajax({
+                        url: url + 'user/userAssetInfo',
+                        type: 'post',
+                        data: JSON.stringify({"access_token":localStorage.token,"platform":2}),
+                        success: function(res) {
+                            if (res.state == 0) {
+                                _self.userAccountInfo = res.data;
+                                localStorage.userAccountInfo = JSON.stringify(res.data);
+                            }
+                        },
+                        error: _self.requestError
+                    });
+                },
+
+                requestError: function(xhr, errorType, error) {
+                    $.toast(xhr.responseText);
+                }
+
+            },
+            ready: function() {
+                this.initData();
+            }
+        });
+
+
+
+
+
+    })
+    </script>
+</body>
+
+</html>

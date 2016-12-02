@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>账户详情</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="stylesheet" href="../css/sm-min.css">
+    <link rel="stylesheet" href="../css/userAccount.css">
+    <style>
+        [v-cloak]{
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="page-group">
+        <div class="page page-current">
+            <div class="content account-detail" id="accountDetail" v-cloak>
+                <div class="asset">
+                    <div class="asset-detail">
+                        <div class="prop-name">总资产(元)</div>
+                        <div class="prop-value">{{accountDetail.totalFund}}</div>
+                    </div>
+                    <div id="pie_chart" class="pie-chart">
+                    </div>
+                </div>
+                <div class="list-block asset-personal" style="margin:0 0 .25rem 0">
+                    <ul>
+                        <li class="item-content ">
+                            <div class="item-media"><i class="icon1 icon-assetdetail-benjin"></i></div>
+                            <div class="item-inner">
+                                <div class="item-title">在投本金(元)</div>
+                                <div class="item-detail">{{accountDetail.dueinFund}}</div>
+                            </div>
+                        </li>
+                        <li class="item-content ">
+                            <div class="item-media"><i class="icon1 icon-assetdetail-shouyi"></i></div>
+                            <div class="item-inner">
+                                <div class="item-title">预期收益(元)</div>
+                                <div class="item-detail">{{accountDetail.receivingProfit}}</div>
+                            </div>
+                        </li>
+                        <li class="item-content">
+                            <div class="item-media"><i class="icon1 icon-assetdetail-available"></i></div>
+                            <div class="item-inner">
+                                <div class="item-title">可用余额(元)</div>
+                                <div class="item-detail">{{accountDetail.balanceFund}}</div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="list-block asset-platform" style="margin:0 0 .25rem 0">
+                    <ul>
+                        <li class="item-content">
+                            <div class="item-media"><i class="icon1 icon-assetdetail-jiangli"></i></div>
+                            <div class="item-inner">
+                                <div class="item-title">平台奖励(元)</div>
+                                <div class="item-detail">100,000</div>
+                            </div>
+                        </li>
+                        <li class="item-content">
+                            <div class="item-media"><i class="icon1 icon-assetdetail-hongbao"></i></div>
+                            <div class="item-inner">
+                                <div class="item-title">平台红包(元)</div>
+                                <div class="item-detail">100,000,000</div>
+                            </div>
+                        </li>
+                        <li class="item-content">
+                            <div class="item-media"><i class="icon1 icon-assetdetail-fanxian"></i></div>
+                            <div class="item-inner">
+                                <div class="item-title">平台返现(元)</div>
+                                <div class="item-detail">100,000,000</div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <script type='text/javascript' src='../js/lib.min.js' charset='utf-8'></script>
+    <script type='text/javascript' src='../js/base.js' charset='utf-8'></script>
+    <script src="../js/echarts.min.js"></script>
+    <script>
+    $(function() {
+
+        var vm = new Vue({
+            el:'#accountDetail',
+            data:{
+                accountDetail:JSON.parse(localStorage.userAccountInfo)
+            }
+        });
+        console.log(vm.accountDetail.totalFund);
+
+
+        // 饼图
+        var pieChart = echarts.init(document.getElementById('pie_chart'));
+        var pieOption = {
+            series: [{
+                name: '资产详情',
+                type: 'pie',
+                // 是否开启hover扇区放大效果
+                hoverAnimation: false,
+                //选中扇区偏移距离
+                selectedOffset: 10,
+                radius: ['90%', '100%'],
+                avoidLabelOverlap: false,
+                // 饼图图形上的文本标签
+                label: {
+                    normal: {
+                        show: false
+                    }
+                },
+                labelLine: {
+                    normal: {
+                        show: false
+                    }
+                },
+                data: [{
+                    value: 335,
+                    name: '固收'
+                }, {
+                    value: 310,
+                    name: '票据'
+                }, {
+                    value: 234,
+                    name: '基金'
+                }],
+                color: ['#c33552', '#e16781', '#ffae01']
+            }]
+        };
+        pieChart.setOption(pieOption);
+
+    })
+    </script>
+</body>
+
+</html>

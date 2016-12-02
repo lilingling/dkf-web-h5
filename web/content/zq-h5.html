@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>中秋标</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+    html {font-size: 20px;}
+
+    .page {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        /*font-size: 0;*/
+    }
+
+    .zq-page .header {
+        position: relative;
+        font-size: 0;
+    }
+
+    .zq-page .content {
+        position: relative;
+        padding: 0 .625rem;
+        background: url("../../img/zq-bid-pic2.png") top center no-repeat;
+    }
+
+    .zq-page .content .zq-bid {
+        padding: 0 .6rem .5rem;
+        background: url("../../img/zq-bid-pic4.png") top center no-repeat;
+        color: #fff;
+        background-size: 100% 100%;
+    }
+
+    .zq-bid h2 {
+        position: relative;
+        text-align: center;
+        height: 1.5rem;
+    }
+
+    .zq-bid h2:after {
+        content: '';
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        right: auto;
+        top: auto;
+        height: 1px;
+        width: 100%;
+        background-color: #a99da2;
+        display: block;
+        z-index: 15;
+        transform-origin: 50% 100%;
+    }
+
+    @media only screen and (-webkit-min-device-pixel-ratio: 2) {
+        .zq-bid h2:after {
+            transform: scaleY(0.5);
+        }
+    }
+
+    @media only screen and (-webkit-min-device-pixel-ratio: 3) {
+        .zq-bid h2:after {
+            transform: scaleY(0.33);
+        }
+    }
+
+    .zq-bid h2 img {
+        width: 2.875rem;
+        vertical-align: middle;
+    }
+
+    .zq-bid .zq-bid-detail {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .zq-bid .zq-bid-detail > div {
+        position: relative;
+        flex:1;
+        text-align: center;
+        margin-top: .35rem;
+    }
+    .zq-bid .zq-bid-detail>div:last-child {
+      display: flex;
+      flex:3;
+    }
+    .bid-amount,.bid-buy{
+      flex:1;
+    }
+    .bid-amount {
+      flex:2;
+    }
+    .zq-bid .bid-rate:after,
+    .zq-bid .bid-deadline:after,
+    .zq-bid .bid-minMoney:after {
+        content: '';
+        position: absolute;
+        left: auto;
+        bottom: 0;
+        right: 0;
+        top: auto;
+        width: 1px;
+        height: 100%;
+        background-color: #a99da2;
+        display: block;
+        z-index: 15;
+        transform-origin: 50% 100%;
+    }
+
+    @media only screen and (-webkit-min-device-pixel-ratio: 2) {
+        .zq-bid .bid-rate:after,
+        .zq-bid .bid-deadline:after,
+        .zq-bid .bid-minMoney:after {
+            transform: scaleX(0.5);
+        }
+    }
+
+    @media only screen and (-webkit-min-device-pixel-ratio: 3) {
+        .zq-bid .bid-rate:after,
+        .zq-bid .bid-deadline:after,
+        .zq-bid .bid-minMoney:after {
+            transform: scaleX(0.33);
+        }
+    }
+
+    .zq-bid .prop-name {
+        display: block;
+        font-size: .5rem;
+        padding-bottom:.5rem;
+    }
+
+    .zq-bid .prop-value {
+        display: block;
+        font-size: .35rem;
+    }
+
+    .zq-bid .prop-value span {
+        font-size: .55rem;
+    }
+    .zq-bid .bid-buy .countdown{
+      font-size:.4rem;
+      white-space: nowrap;
+       padding-bottom:.2rem;
+    }
+    .zq-bid .bid-buy .butn {
+      padding:.2rem .3rem;
+      color:#fff;
+      text-align: center;
+      background-color:#e66e2b;
+      border-radius:.2rem;
+      text-decoration: none;
+      font-size: .6rem;
+          white-space: nowrap;
+    }
+    .zq-bid .bid-buy .butn.active {
+      background-color: #c33552;
+    }
+    .zq-bid .bid-buy .percent-row{
+      padding-bottom: .5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .zq-bid .bid-buy .percent{
+      display: inline-block;
+      width:2.2rem;
+      height:.2rem;
+      background-color: #9b7b7c;
+      border-radius: .1rem;
+
+    }
+    .zq-bid .bid-buy .percent .process {
+      display: block;
+      background-color:#4fa6dd;
+      height: 100%;
+      border-radius: .1rem;
+    }
+    .bid-buy .percent-row .percent-value{
+      font-size: .45rem;
+    }
+
+
+    .zq-page .content .insurance a {
+        position: absolute;
+        bottom: 1.8rem;
+        right: 3rem;
+        display: block;
+        font-size: .5rem;
+        color: #fff;
+        text-align: center;
+        background-color: rgba(255, 150, 48, .35);
+        text-decoration: none;
+        border: 1px solid #f8ae67;
+        padding: .2rem .3rem;
+        border-radius: .5rem;
+        -webkit-transform:scale3d(.9,.9,.9);
+        -webkit-animation:breath 1.2s ease-in-out infinite forwards alternate;
+    }
+
+    .zq-page .footer {
+        color: #e66e2b;
+        padding: .5rem .625rem 1.9rem;
+        background: url("../../img/zq-bid-pic3.png") top center no-repeat;
+    }
+
+    .zq-page .footer .warm-tips h2 {
+        font-size: .55rem;
+        text-indent: 1em;
+        line-height: 2;
+    }
+
+    .zq-page .footer .warm-tips li {
+        font-size: .45rem;
+        line-height: 1.8;
+        list-style-type: decimal;
+        margin-left: 2em;
+    }
+
+    img {
+        width: 100%;
+    }
+
+    .mb-10 {
+        margin-bottom: .5rem;
+    }
+
+    .anim-text {
+        position: absolute;
+        bottom: .85rem;
+        left: 50%;
+        -webkit-transform: translateX(-50%);
+
+    }
+
+    .anim-text .anim-text1 {
+        width: .9rem;
+        -webkit-animation:anim-text .6s ease .2s forwards;
+        opacity: 0;
+    }
+
+    .anim-text .anim-text2 {
+        width: 1.025rem;
+        -webkit-animation:anim-text .6s ease .7s forwards;
+        opacity: 0;
+    }
+
+    .anim-text .anim-text3 {
+        width: .925rem;
+        -webkit-animation:anim-text .6s ease 1.2s forwards;
+        opacity: 0;
+    }
+
+    .anim-text .anim-text4 {
+        width: 1.075rem;
+        -webkit-animation:anim-text .6s ease 1.7s forwards;
+        opacity: 0;
+    }
+
+    .anim-text .anim-text5 {
+        width: 1rem;
+        -webkit-animation:anim-text .6s ease 2.2s forwards;
+        opacity: 0;
+    }
+    @-webkit-keyframes anim-text {
+      0% {
+        opacity: 0;
+        -webkit-transform:rotate(0deg) scale(.6,.6);
+      }
+      80% {
+        opacity: 1;
+        -webkit-transform:rotate(360deg) scale(1.2,1.2);
+      }
+      100% {
+        opacity: 1;
+        -webkit-transform:rotate(360deg) scale(1,1);
+      }
+    }
+    @-webkit-keyframes breath {
+      0%{
+        -webkit-transform:scale3d(.9,.9,.9);
+      }
+      100%{
+        -webkit-transform:scale3d(1,1,1);
+      }
+    }
+    </style>
+</head>
+
+<body>
+    <div class="page zq-page">
+        <div class="header">
+            <img src="../../img/zq-bid-pic1.png">
+            <div class="anim-text">
+                <img src="../../img/zq-anim-pic1.png" alt="" class="anim-text1">
+                <img src="../../img/zq-anim-pic2.png" alt="" class="anim-text2">
+                <img src="../../img/zq-anim-pic3.png" alt="" class="anim-text3">
+                <img src="../../img/zq-anim-pic4.png" alt="" class="anim-text4">
+                <img src="../../img/zq-anim-pic5.png" alt="" class="anim-text5">
+            </div>
+        </div>
+        <div class="content">
+            <div class="zq-bid mb-10 ">
+                <h2 class="prop-title"><img src="../../img/zq-bid-title.png"/></h2>
+                <div class="zq-bid-detail">
+                    <div class="bid-rate">
+                        <label class="prop-name">预期年化</label>
+                        <label class="prop-value"><span>8.15</span>%</label>
+                    </div>
+                    <div class="bid-deadline">
+                        <label class="prop-name">期限</label>
+                        <label class="prop-value"><span>6</span>月</label>
+                    </div>
+                    <div class="bid-minMoney">
+                        <label class="prop-name">起投金额</label>
+                        <label class="prop-value"><span>100</span>%</label>
+                    </div>
+                    <div>
+                      <div class="bid-amount">
+                        <label class="prop-name">募集总额</label>
+                        <label class="prop-value"><span>1，000,000,000</span>元</label>
+                      </div>
+<!--                        <div class="bid-buy">
+                        <p class="countdown">24时59分6秒</p>
+                        <a href="" class="butn">即将开始</a>
+                      </div> -->
+                        <div class="bid-buy">
+                        <div class="percent-row">
+                        <p class="percent"><i class="process" style="width:30%"></i></p>
+                        <label class="percent-value">30%</label>
+                        </div>
+                        <a href="" class="butn active">立即购买</a>
+                      </div>
+                    </div>
+
+                </div>
+            </div>
+            <img src="../../img/zq-bid-pic5.png" class="mb-10 ">
+            <img src="../../img/zq-bid-pic6.png" class="mb-10 ">
+            <div class="insurance">
+                <img src="../../img/zq-bid-pic7.png" class="mb-10 ">
+                <a href="">速去邀请好友</a>
+            </div>
+        </div>
+        <div class="footer">
+            <ul class="warm-tips">
+                <h2>温馨提示:</h2>
+                <li>本活动时间为2016年9月5日10：00至2016年9月19日18：00；</li>
+                <li>用户可通过我的账户-奖励管理中查看奖励发放情况；</li>
+                <li>现金奖励可用于投资或按照平台提现规则进行提现，一旦发现虚假行为，道口财富平台有权清除虚假数据并收回相关奖励，并保留采取相关法律手段的权利；</li>
+                <li>本活动解释权归道口财富所有，如有疑问请联系在线客服或拨打客服热线400-650-9536（服务时间：周一至周五9：30—18：30）</li>
+            </ul>
+        </div>
+    </div>
+</body>
+<script>
+
+</script>
+
+</html>

@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>充值</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no" />
+    <link rel="stylesheet" href="../../css/sm.css">
+    <link rel="stylesheet" href="../../css/sm-extend.css">
+    <link rel="stylesheet" href="../../css/userAccount.css">
+    <style>
+        .modal.moveUp {
+            position: relative;
+            margin-top:0 !important;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="page-group">
+        <div class="page page-current">
+            <div class="content recharge" id="rechargeForm" >
+                <validator name="validation">
+                    <form novalidate>
+                        <div class="bank-card">
+                            <div class="card-logo">
+                                <img :src="bankInfo.bankIcon" alt="" id="bank_img">
+                                <label class="jcard-name">{{bankInfo.bankName}}</label>
+                            </div>
+                            <div class="card-num">
+                                <img src="../../img/card_logo2@2x.png" alt="" class="">
+                                <span class="jcard-num">{{bankInfo.cardNumber}}</span>
+                            </div>
+                            <div class="card-info">
+                                <label class="jcard-username">账户名: <span>{{bankInfo.userRealName}}</span></label>
+                                <label class="card-limit">限额:<span>5万元/笔</span><span>10万元/月</span></label>
+                            </div>
+                        </div>
+                        <div class="recharge-inputbox">
+                            <label class="prop-name">充值金额（元）</label>
+                            <input type="text" class="input-recharge" placeholder="0.00" id="recharge_money" readonly="readonly" v-on:click="propPwdBox">
+                        </div>
+                        <input type="button" value="立即充值" class="button button-fill jbutn-recharge" disabled="disabled" v-on:click="toRecharge">
+                        <div class="checkbox agreement">
+                            <input type="checkbox" name="agreement" id="agreement" checked="checked" v-validate:agreement="['required']">
+                            <label for="agreement"></label>
+                            <p>我已阅读并同意<a href="../content/agreement_tonglian.html" class="external">《通联支付代扣协议》</a></p>
+
+                        </div>
+                    </form>
+                </validator>
+                <p class="recharge-tips">预计1分钟到账，以实际到账时间为准</p>
+            </div>
+        </div>
+    </div>
+</body>
+<script type='text/javascript' src='../../js/lib.min.js' charset='utf-8'></script>
+<script type='text/javascript' src='../../js/base.js' charset='utf-8'></script>
+
+<script>
+$(function() {
+    var url = 'http://192.168.1.220:8080/dkf-web/';
+    var publickey = '';
+    var vm = new Vue({
+    el: '#rechargeForm',
+    data: {
+        bankInfo:''
+    },
+    methods: {
+        initData:function() {
+            var _self = this;
+            $.ajax({
+                url:url + 'userRealNamePayOne/applyToQueryRealNamePayInfo',
+                type: 'POST',
+                data:JSON.stringify({platform:'2'}),
+                success: function(res) {
+                    if (res.state == 0) {
+                        _self.bankInfo = res.data;
+                    } else {
+                        $.toast(res.msg);
+                    }
+                },
+                error: _self.requestError
+            })
+        },
+        propPwdBox: function() {
+            new base.KeyBoard(recharge_money);
+            setTimeout(function() {
+                $('#table_keyboard').addClass('active');
+            }, 200)
+        },
+        toRecharge: function() {
+            $('#table_keyboard').removeClass('active');
+            var rechargeMoney = $('#recharge_money').val();
+
+            // 弹出交易密码弹框
+            var pwdModal = $.modal({
+                title: '<div class="dealpassword-alert-title">' + '<div class="jclose">' + '<div class="left-line line"></div>' + '<div class="right-line line"></div>' + '</div>' + '<label>请输入交易密码</label>' + '</div>',
+                text: '<div class="dealpassword-alert-content">' + '<label class="prop-name">充值金额（元）</label>' + '<label class="prop-value">' + rechargeMoney + '</label>' + '<div class="input-box ">' + '<div class="inner-box"><input type="password" /></div>' + '<div class="inner-box"><input type="password" readonly="readonly" /></div>' + '<div class="inner-box"><input type="password" readonly="readonly" /></div>' + '<div class="inner-box"><input type="password" readonly="readonly" /></div>' + '<div class="inner-box"><input type="password" readonly="readonly" /></div>' + '<div class="inner-box"><input type="password" readonly="readonly" /></div>' + '<input type="tel" id="pwd_input"  readonly="readonly" />' + '</div>' + '</div>'
+
+            });
+
+
+            $('body').on('tap', '.dealpassword-alert-title', function() {
+                $.closeModal(pwdModal);
+            });
+            var pwdInput = document.getElementById('pwd_input');
+            pwdInput.onclick = function() {
+                new base.KeyBoard(pwdInput);
+                setTimeout(function() {
+                    $('#table_keyboard').addClass('active');
+                }, 200)
+
+            };
+        },
+        requestError: function(xhr, errorType, error) {
+            $.toast(xhr.responseText);
+        }
+
+    },
+    ready:function() {
+        this.initData();
+    }
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+});
+</script>
+
+</html>

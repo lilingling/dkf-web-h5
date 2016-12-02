@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>平台消息</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="stylesheet" href="../../css/sm.css">
+    <link rel="stylesheet" href="../../css/sm-extend.css">
+    <link rel="stylesheet" href="../../css/content.css">
+</head>
+
+<body>
+    <div class="page-group">
+        <div class="page page-current">
+            <div class="content platform-notice" id="noticeDetail">
+                <div class="notice-title">
+                    <p v-text="noticeContent.title"></p>
+                    <div class="card-footer">
+                        <label v-text="noticeContent.publishTime"></label>
+                        <label>道口财富运营团队</label>
+                    </div>
+                </div>
+                <div class="notice-content">
+                    <p v-html="noticeContent.details"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type='text/javascript' src='../../js/lib.min.js' charset='utf-8'></script>
+    <script type='text/javascript' src='../../js/base.js' charset='utf-8'></script>
+    <script>
+
+    $(function() {
+        var url = 'http://192.168.1.220:8080/dkf-web/';
+        var hash = window.location.hash.substr(1);
+        new Vue({
+            el:'#noticeDetail',
+            data:{
+                noticeContent:''
+            },
+            methods:{
+                initData:function() {
+                    var _self = this;
+                        $.ajax({
+                            url: url+'home/getGFGGDetail',
+                            type: 'POST',
+                            data: JSON.stringify({id:hash}),
+                            success: function(res) {
+                                _self.noticeContent = res.data;
+
+                            },
+                            error:_self.requestError
+                        });
+                },
+                requestError: function(xhr, errorType, error) {
+                    $.toast(xhr.responseText);
+                }
+
+            },
+            ready:function() {
+                this.initData();
+            }
+        });
+
+
+
+    })
+
+    </script>
+</body>
+
+</html>

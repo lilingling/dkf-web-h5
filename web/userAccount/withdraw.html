@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>提现</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no" />
+    <link rel="stylesheet" href="../../css/sm.css">
+    <link rel="stylesheet" href="../../css/sm-extend.css">
+    <link rel="stylesheet" href="../../css/userAccount.css">
+    <style>
+    .modal.moveUp {
+        position: relative;
+        margin-top: 0 !important;
+    }
+    </style>
+</head>
+
+<body>
+    <div class="page-group">
+        <div class="page page-current">
+            <div class="content withdraw" id="withdrawForm">
+                <validator name="validation">
+                    <form novalidate>
+                        <div class="bank-card">
+                            <div class="card-info">
+                                <div class="card-logo">
+                                    <img src="../../img/card-logo1@2x.png" alt="" id="bank_img">
+                                    <label class="jcard-name">招商银行</label>
+                                </div>
+                                <label class="jcard-username">账户名: <span>茹*</span></label>
+                            </div>
+                            <div class="card-num">
+                                <img src="../../img/card_logo2@2x.png" alt="" class="">
+                                <span class="jcard-num">6214********6242</span>
+                            </div>
+                        </div>
+                        <div class="available-money">
+                            可提现金额(元) :<span>2000,000</span>
+                        </div>
+                        <div class="withdraw-inputbox mb10">
+                            <label class="prop-name">提现金额（元）</label>
+                            <input type="text" class="input-recharge" placeholder="0.00" id="withdraw_money" readonly="readonly" v-on:click="propKeyboardBox">
+                        </div>
+                        <div class="row charges-row no-gutter">
+                            <div class="col-50">
+                                <div class="handling-charges">
+                                    <label class="prop-name">提现手续费（元）</label>
+                                    <label class="prop-value">2.00</label>
+                                </div>
+                            </div>
+                            <div class="col-50">
+                                <div class="checkbox deduction-ticket">
+                                    <p>使用已有提现抵扣券</p>
+                                    <input type="checkbox" name="deduction" id="deduction" checked="checked" v-validate:agreement="['required']">
+                                    <label for="deduction"></label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="actual-charges">
+                            <label >实际扣除(元)：<strong>5.00</strong></label>
+                            <a href="">去商城兑换</a>
+                        </div>
+                        <input type="button" value="确认" class="button button-fill jbutn-recharge" disabled="disabled" v-on:click="toWithdraw">
+                    </form>
+                </validator>
+                <p class="recharge-tips">1~2个工作日到账（双休和法定节假日除外）</p>
+            </div>
+        </div>
+    </div>
+</body>
+<script type='text/javascript' src='../../js/lib/zepto.js' charset='utf-8'></script>
+<script type='text/javascript' src='../../js/lib/sm.js' charset='utf-8'></script>
+<script type='text/javascript' src='../../js/lib/sm-extend.min.js' charset='utf-8'></script>
+<script src="../../js/lib/vue.min.js"></script>
+<script src="../../js/lib/vue-validator.min.js"></script>
+<script>
+$(function() {
+    $.init();
+    var KeyBoard = function(input, options) {
+        var body = document.getElementsByTagName('body')[0];
+        var DIV_ID = options && options.divId || '__w_l_h_v_c_z_e_r_o_divid';
+
+        if (document.getElementById(DIV_ID)) {
+            body.removeChild(document.getElementById(DIV_ID));
+        }
+
+        this.input = input;
+        this.el = document.createElement('div');
+
+        var self = this;
+        var zIndex = options && options.zIndex || 20000;
+        var width = options && options.width || '100%';
+        var height = options && options.height || '9.75rem';
+        var fontSize = options && options.fontSize || '15px';
+        var backgroundColor = options && options.backgroundColor || '#fff';
+        var TABLE_ID = options && options.table_id || 'table_keyboard';
+        var mobile = typeof orientation !== 'undefined';
+
+        this.el.id = DIV_ID;
+        this.el.style.position = 'fixed';
+        this.el.style.left = 0;
+        this.el.style.right = 0;
+        this.el.style.bottom = '-9.75rem';
+        this.el.style.zIndex = zIndex;
+        this.el.style.width = width;
+        this.el.style.height = height;
+        this.el.style.backgroundColor = backgroundColor;
+        //样式
+
+        //table
+        var tableStr = '<table id="' + TABLE_ID + '" border="0" cellspacing="0" cellpadding="0">';
+        tableStr += '<tr><td>1<img src="../../img/blank.png"/></td><td>2<img src="../../img/abc.png"/></td><td>3<img src="../../img/def.png"/></td></tr>';
+        tableStr += '<tr><td>4<img src="../../img/ghi.png"/></td><td>5<img src="../../img/jkl.png"/></td><td>6<img src="../../img/mno.png"/></td></tr>';
+        tableStr += '<tr><td>7<img src="../../img/pqrs.png"/></td><td>8<img src="../../img/tuv.png"/></td><td>9<img src="../../img/wxyz.png"/></td></tr>';
+        tableStr += '<tr><td style="background-color:#d4d8db;">.</td><td>0</td>';
+        tableStr += '<td style="background-color:#d4d8db;"><span class="icon icon-keyboard-delete" style="font-size:0;" >删除</span></td></tr>';
+        tableStr += '</table>';
+        this.el.innerHTML = tableStr;
+
+        // 6个表单输入框
+        var inputDiv = document.getElementsByClassName("inner-box");
+
+        function addEvent(e) {
+            var ev = e || window.event;
+            var clickEl = ev.element || ev.target;
+            var value = clickEl.textContent || clickEl.innerText;
+            if (clickEl.tagName.toLocaleLowerCase() === 'td' && value !== "删除") {
+                if (self.input) {
+                    self.input.value += value;
+                }
+            } else if (clickEl.tagName.toLocaleLowerCase() === 'span' && value === "删除") {
+                var num = self.input.value;
+                if (num) {
+                    var newNum = num.substr(0, num.length - 1);
+                    self.input.value = newNum;
+                }
+            }
+            // // 点亮充值按钮
+            if (this.textContent == '') {
+                $('.jbutn-recharge').attr('disabled','disabled');
+            } else {
+                $('.jbutn-recharge').removeAttr('disabled');
+            }
+            // 方格显示输入数字
+            if (self.input.id == 'pwd_input' || self.input.id == 'pwd_input1') {
+                var pwdValue = self.input.value;
+                var len = pwdValue.length;
+                if (value == '删除') {
+                    inputDiv[len].childNodes[0].value = '';
+                }
+                for (var i = 0; i < len; i++) {
+                    inputDiv[i].childNodes[0].value = pwdValue[i];
+                }
+                if (len >= 6) {
+                    $('#table_keyboard').removeClass('active');
+                    $('.modal').removeClass('moveUp');
+                    if (self.input.id == 'pwd_input') {
+                        $.closeModal(vm.pwdModal);
+                        // 绑定实名付弹窗
+                        var realnameModal = $.modal({
+                            text: '<div class="realname-alert-content">' + '<div class="jclose">' + '<div class="left-line line"></div>' + '<div class="right-line line"></div>' + '</div>' + '<img src="../../img/card_icon@2x.png" class="">' + '<p>尊敬的用户，您正在通过通联支付开通银行卡代扣支付功能。</p>' + '<div class="phoneNum-row">' + '<label>预留手机号:</label>' + '<label>18511745835</label>' + '</div>' + '<div class="verifiyCode-row">' + '<label>短信验证码:</label>' + '<div class="input-box">' + '<div class="inner-box"><input type="password" readonly="readonly" /></div>' + '<div class="inner-box"><input type="password" readonly="readonly" /></div>' + '<div class="inner-box"><input type="password" readonly="readonly" /></div>' + '<div class="inner-box"><input type="password" readonly="readonly" /></div>' + '<div class="inner-box"><input type="password" readonly="readonly" /></div>' + '<div class="inner-box"><input type="password" readonly="readonly" /></div>' + '<input type="tel" id="pwd_input1" readonly="readonly"/>' + '</div>' + '</div>' + '<p class="secondSend-tips">' + '没收到验证码？<a href="">再次发送</a>' + '</p>' + '</div>',
+                            buttons: [{
+                                text: '确定',
+                                onClick: function() {}
+                            }]
+
+                        });
+                    } else if (self.input.id == 'pwd_input1') {
+                        $.closeModal(realnameModal);
+                    }
+                    var pwdInput1 = document.getElementById('pwd_input1');
+                    pwdInput1.onclick = function() {
+                        $('.modal').addClass('moveUp');
+                        new KeyBoard(pwdInput1);
+                        setTimeout(function() {
+                            $('#table_keyboard').addClass('active');
+                        }, 200)
+
+                    };
+                    $('body').on('tap', '.jclose', function() {
+                        $.closeModal(realnameModal);
+                    });
+
+
+                }
+            }
+
+        }
+
+        if (mobile) {
+            this.el.ontouchstart = addEvent;
+        } else {
+            this.el.onclick = addEvent;
+        }
+        body.appendChild(this.el);
+    }
+    var vm = new Vue({
+        el: '#withdrawForm',
+        data: {
+
+        },
+        validator: {},
+        methods: {
+            propKeyboardBox: function(e) {
+                var _self = this;
+                new KeyBoard(withdraw_money);
+                setTimeout(function() {
+                    $('#table_keyboard').addClass('active');
+                    // e.target.tagName;
+                }, 200)
+            },
+            toRecharge: function() {
+                $('#table_keyboard').removeClass('active');
+                var rechargeMoney = $('#recharge_money').val();
+                // 弹出交易密码弹框
+                var pwdModal = $.modal({
+                    title: '<div class="dealpassword-alert-title">' + '<div class="jclose">' + '<div class="left-line line"></div>' + '<div class="right-line line"></div>' + '</div>' + '<label>请输入交易密码</label>' + '</div>',
+                    text: '<div class="dealpassword-alert-content">' + '<label class="prop-name">充值金额（元）</label>' + '<label class="prop-value">' + rechargeMoney + '</label>' + '<div class="input-box ">' + '<div class="inner-box"><input type="password" /></div>' + '<div class="inner-box"><input type="password" readonly="readonly" /></div>' + '<div class="inner-box"><input type="password" readonly="readonly" /></div>' + '<div class="inner-box"><input type="password" readonly="readonly" /></div>' + '<div class="inner-box"><input type="password" readonly="readonly" /></div>' + '<div class="inner-box"><input type="password" readonly="readonly" /></div>' + '<input type="tel" id="pwd_input"  readonly="readonly" />' + '</div>' + '</div>'
+
+                });
+
+                $('body').on('tap', '.dealpassword-alert-title', function() {
+                    $.closeModal(pwdModal);
+                });
+                var pwdInput = document.getElementById('pwd_input');
+                pwdInput.onclick = function() {
+                    new KeyBoard(pwdInput);
+                    setTimeout(function() {
+                        $('#table_keyboard').addClass('active');
+                    }, 200)
+
+                };
+            }
+        }
+    });
+
+
+
+
+});
+</script>
+
+</html>

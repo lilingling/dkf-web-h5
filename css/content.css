@@ -1,0 +1,297 @@
+.data-operation,
+.data-project,
+.data-trend {
+  position: relative;
+  padding-bottom: .75rem;
+}
+.data-operation .list,
+.data-project .list,
+.data-trend .list {
+  height: 3.75rem;
+  padding: .6rem 0;
+  margin-bottom: .25rem;
+  background-color: #fff;
+}
+.data-operation .list .col-50,
+.data-project .list .col-50,
+.data-trend .list .col-50 {
+  position: relative;
+  height: 100%;
+  text-align: center;
+}
+.data-operation .list .col-50 .extra-tip,
+.data-project .list .col-50 .extra-tip,
+.data-trend .list .col-50 .extra-tip {
+  position: absolute;
+  top: 1rem;
+  left: 50%;
+  background-color: #e7adbc;
+  z-index: 10;
+  color: #fff;
+  width: 80%;
+  border-radius: .25rem;
+  font-size: .5rem;
+  padding: .1rem .2rem;
+  margin-left: -40%;
+  opacity: 0;
+}
+.data-operation .list .col-50 .extra-tip:after,
+.data-project .list .col-50 .extra-tip:after,
+.data-trend .list .col-50 .extra-tip:after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border: .25rem solid #e7adbc;
+  border-left-color: transparent;
+  border-right-color: transparent;
+  border-top-color: transparent;
+  -webkit-transform: translate(-50%, -100%);
+}
+.data-operation .list .col-50 .extra-tip.active,
+.data-project .list .col-50 .extra-tip.active,
+.data-trend .list .col-50 .extra-tip.active {
+  -webkit-animation: fadeInDown 0.6s ease 0.2s forwards, hide 0.1s linear 1s forwards;
+  animation: fadeInDown 0.6s ease 0.2s forwards, hide 0.1s linear 1.3s forwards;
+}
+.data-operation .list .col-50 .jextra-tag,
+.data-project .list .col-50 .jextra-tag,
+.data-trend .list .col-50 .jextra-tag {
+  position: absolute;
+  top: -0.6rem;
+}
+.data-operation .list .col-50 .jextra-tag img,
+.data-project .list .col-50 .jextra-tag img,
+.data-trend .list .col-50 .jextra-tag img {
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: .6rem;
+}
+.data-operation .list .col-50 .right-extra-tag,
+.data-project .list .col-50 .right-extra-tag,
+.data-trend .list .col-50 .right-extra-tag {
+  right: 0;
+}
+.data-operation .list .col-50 .right-extra-tag img,
+.data-project .list .col-50 .right-extra-tag img,
+.data-trend .list .col-50 .right-extra-tag img {
+  border-color: #e7adbc;
+  border-left-color: transparent;
+  border-bottom-color: transparent;
+}
+.data-operation .list .col-50 .right-extra-tag span,
+.data-project .list .col-50 .right-extra-tag span,
+.data-trend .list .col-50 .right-extra-tag span {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 99;
+  background: url("../img/11.png") top right no-repeat;
+  background-size: cover;
+}
+.data-operation .list .col-50 .left-extra-tag,
+.data-project .list .col-50 .left-extra-tag,
+.data-trend .list .col-50 .left-extra-tag {
+  left: 0;
+}
+.data-operation .list .col-50 .left-extra-tag img,
+.data-project .list .col-50 .left-extra-tag img,
+.data-trend .list .col-50 .left-extra-tag img {
+  border-color: #a7d2ee;
+  border-right-color: transparent;
+  border-top-left-radius: .5rem;
+  border-bottom-color: transparent;
+}
+.data-operation .list .col-50 .left-extra-tag span,
+.data-project .list .col-50 .left-extra-tag span,
+.data-trend .list .col-50 .left-extra-tag span {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 99;
+  background: url("../img/11.png") no-repeat;
+  background-position: -0.7rem 0;
+  background-size: cover;
+}
+.data-operation .list .col-50 .left-extra-tag + .extra-tip,
+.data-project .list .col-50 .left-extra-tag + .extra-tip,
+.data-trend .list .col-50 .left-extra-tag + .extra-tip {
+  background-color: #a7d2ee;
+}
+.data-operation .list .col-50 .left-extra-tag + .extra-tip:after,
+.data-project .list .col-50 .left-extra-tag + .extra-tip:after,
+.data-trend .list .col-50 .left-extra-tag + .extra-tip:after {
+  border-bottom-color: #a7d2ee;
+}
+.data-operation .prop-name,
+.data-project .prop-name,
+.data-trend .prop-name {
+  color: #888;
+  margin: 0;
+  position: relative;
+}
+.data-operation .prop-value,
+.data-project .prop-value,
+.data-trend .prop-value {
+  font-size: .75rem;
+  margin: .5rem auto 0;
+}
+.data-operation img.data-title,
+.data-project img.data-title,
+.data-trend img.data-title {
+  display: block;
+  margin: 0 auto .5rem;
+  width: 7.05rem;
+}
+.data-operation .trend-line,
+.data-project .trend-line,
+.data-trend .trend-line {
+  height: 9.45rem;
+}
+.data-operation .path,
+.data-project .path,
+.data-trend .path {
+  stroke-dasharray: 400;
+  stroke-dashoffset: 400;
+}
+.data-operation .svg-line-1,
+.data-project .svg-line-1,
+.data-trend .svg-line-1 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+.data-trend img.data-title {
+  width: 8.8rem;
+}
+.data-operation .path1 {
+  animation: dash .5s linear 0.1s forwards;
+}
+.data-operation .path2 {
+  animation: dash 1s linear 0.5s forwards;
+}
+.data-operation .path3 {
+  opacity: 0;
+  animation: show .4s linear 1.4s forwards;
+}
+.data-operation .path4 {
+  animation: dash .5s linear 1.7s forwards;
+}
+.data-operation .path5 {
+  animation: dash 1s linear 2.1s forwards;
+}
+.data-operation .path6 {
+  opacity: 0;
+  animation: show .4s linear 3s forwards;
+}
+.data-operation .path7 {
+  animation: dash .5s linear 3.3s forwards;
+}
+.data-operation .path8 {
+  animation: dash 1s linear 3.7s forwards;
+}
+.data-operation .path9 {
+  opacity: 0;
+  animation: show .4s linear 4.6s forwards;
+}
+.data-operation .path10 {
+  animation: dash .5s linear 5s forwards;
+}
+.data-project .path1 {
+  animation: dash .5s linear 5.5s forwards;
+}
+.data-project .path2 {
+  animation: dash 1s linear 5.9s forwards;
+}
+.data-project .path3 {
+  opacity: 0;
+  animation: show .4s linear 6.8s forwards;
+}
+.data-project .path4 {
+  animation: dash .5s linear 7.1s forwards;
+}
+.data-project .path5 {
+  animation: dash 1s linear 7.5s forwards;
+}
+.data-project .path6 {
+  opacity: 0;
+  animation: show .4s linear 8.4s forwards;
+}
+.data-project .path7 {
+  animation: dash .5s linear 8.7s forwards;
+}
+.data-project .path8 {
+  animation: dash 1s linear 9.1s forwards;
+}
+.data-project .path9 {
+  opacity: 0;
+  animation: show .4s linear 10s forwards;
+}
+.data-project .path10 {
+  animation: dash .5s linear 10.3s forwards;
+}
+@-webkit-keyframes dash {
+  0% {
+    stroke-dashoffset: 400;
+  }
+  100% {
+    stroke-dashoffset: 1;
+  }
+}
+@-webkit-keyframes show {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@-webkit-keyframes hide {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@-webkit-keyframes fadeInDown {
+  0% {
+    opacity: 0;
+    -webkit-transform: translate3d(0, -100%, 0);
+    transform: translate3d(0, -100%, 0);
+  }
+  100% {
+    opacity: 1;
+    -webkit-transform: none;
+    transform: none;
+  }
+}
+@keyframes fadeInDown {
+  0% {
+    opacity: 0;
+    -webkit-transform: translate3d(0, -60%, 0);
+    transform: translate3d(0, -60%, 0);
+  }
+  100% {
+    opacity: 1;
+    -webkit-transform: none;
+    transform: none;
+  }
+}
+.jdata-deadline {
+  color: #888;
+  text-align: center;
+  margin: 0 auto 2.5rem;
+}
+.jdata-deadline span {
+  margin-left: .25rem;
+}

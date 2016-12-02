@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>平台消息</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="stylesheet" href="../../css/sm.css">
+    <!-- <link rel="stylesheet" href="../../css/sm-extend.css"> -->
+    <style>
+    .banner,
+    .product-youxinbao,
+    .awards-list,
+    .header,
+    .redpacket-open1,
+    .redpacket-open2 {
+        position: relative;
+    }
+
+    .product-youxinbao .butn {
+        position: absolute;
+        bottom: 1.3rem;
+        left: 50%;
+        -webkit-transform: translateX(-50%);
+        -ms-transform: translateX(-50%);
+        transform: translateX(-50%);
+        display: block;
+        width: 4.725rem;
+    }
+
+    .product-youxinbao .l-arrows,
+    .product-youxinbao .r-arrows {
+        top: 1.2rem;
+        left: 4rem;
+    }
+
+    .product-youxinbao .r-arrows {
+        left: auto;
+        right: 3.6rem;
+    }
+
+    .l-arrows,
+    .r-arrows {
+        position: absolute;
+        top: 1.6rem;
+        left: 3rem;
+    }
+
+    .r-arrows {
+        left: auto;
+        right: 2.8rem;
+    }
+
+    .l-arrows .arrow,
+    .r-arrows .arrow {
+        display: inline-block;
+        width: .6rem;
+        margin-left: -2px;
+        opacity: 0;
+        -webkit-animation: blink .6s steps(2, start) infinite;
+    }
+
+    .l-arrows .arrow1,
+    .r-arrows .arrow1 {
+        -webkit-animation-delay: .2s;
+        -ms-animation-delay: .2s;
+        animation-delay: .2s;
+    }
+
+    .l-arrows .arrow2,
+    .r-arrows .arrow2 {
+        -webkit-animation-delay: .4s;
+        -ms-animation-delay: .4s;
+        animation-delay: .4s;
+    }
+
+    .l-arrows .arrow3,
+    .r-arrows .arrow3 {
+        -webkit-animation-delay: .6s;
+        -ms-animation-delay: .6s;
+        animation-delay: .6s;
+    }
+
+    @-webkit-keyframes blink {
+        0% {
+            opacity: 0;
+        }
+        100% {
+            opacity: 1;
+        }
+    }
+
+    @keyframes blink {
+        0% {
+            opacity: 0;
+        }
+        100% {
+            opacity: 1;
+        }
+    }
+
+    .awards-content {
+        position: absolute;
+        right: 3.45rem;
+        top: 5.5rem;
+        height: 7rem;
+        overflow: hidden;
+    }
+
+    .awards-content li {
+        list-style: none;
+        color: #fff;
+        margin-top: .9rem;
+    }
+
+    .awards-content li .tel {
+        margin-right: 1.65rem;
+    }
+
+    .mask {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 99;
+        background-color: rgba(0, 0, 0, .6);
+        display: none;
+    }
+
+    .redPacket-close,
+    .redPacket-open {
+        position: absolute;
+        top: 30%;
+        left: 0;
+    }
+
+    .redPacket-open {
+        left: 50%;
+        margin-left: -8.35rem;
+    }
+
+    .anim-hand {
+        position: absolute;
+        top: 3.9rem;
+        right: 4.7rem;
+        width: 3.7rem;
+        -webkit-animation: knock .8s ease infinite;
+        animation: knock .8s ease infinite;
+        transform-origin: top right;
+    }
+
+    .redPacket-open img {
+        width: 16.7rem;
+    }
+
+    .anim-money {
+        position: relative;
+        width: 10.4rem !important;
+        -webkit-animation: moveUp .5s ease forwards;
+        animation: moveUp .5s ease forwards;
+    }
+
+    .anim-fireworks {
+        position: absolute;
+        bottom: 5.5rem;
+        left: 0;
+        opacity: 0;
+        -webkit-animation: blink .3s ease-in .2s forwards;
+        animation: blink .3s ease-in .2s forwards;
+    }
+
+    @-webkit-keyframes knock {
+        100% {
+            transform: translate(-1rem, 1rem) rotate(-30deg);
+        }
+    }
+
+    @keyframes knock {
+        100% {
+            transform: translate(-1rem, 1rem) rotate(-30deg);
+        }
+    }
+
+    @keyframes moveUp {
+        0% {
+            transform: translateY(50%);
+        }
+        80% {
+            transform: translateY(-5%);
+        }
+        100% {
+            transform: translateY(0%);
+        }
+    }
+
+    @-webkit-keyframes moveUp {
+        0% {
+            transform: translateY(50%);
+        }
+        80% {
+            transform: translateY(-5%);
+        }
+        100% {
+            transform: translateY(0%);
+        }
+    }
+
+    @keyframes moveLeft {
+        0% {
+            transform: translateX(100%);
+        }
+        80% {
+            transform: translateX(-5%);
+        }
+        100% {
+            transform: translateX(0%);
+        }
+    }
+
+    @-webkit-keyframes moveLeft {
+        0% {
+            transform: translateX(100%);
+        }
+        80% {
+            transform: translateX(-5%);
+        }
+        100% {
+            transform: translateX(0%);
+        }
+    }
+
+    @keyframes moveTop {
+        0% {
+            transform: translateY(40%);
+        }
+        80% {
+            transform: translateY(-5%);
+        }
+        100% {
+            transform: translateY(0%);
+        }
+    }
+
+    @-webkit-keyframes moveTop {
+        0% {
+            transform: translateY(40%);
+        }
+        80% {
+            transform: translateY(-5%);
+        }
+        100% {
+            transform: translateY(0%);
+        }
+    }
+
+    .money {
+        position: relative;
+        top: 4rem;
+        font-size: 2rem;
+        color: #c02d2c;
+        width: 100%;
+        text-align: center;
+        z-index: 99;
+    }
+
+    .redpacket-open2 {
+        position: absolute;
+        top: -3rem;
+        left: 50%;
+        margin-left: -5.2rem;
+    }
+
+    .redpacket-open1 .cover {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        z-index: 999;
+    }
+
+    .redPacket-open {
+        display: none;
+    }
+
+    .anim-ball {
+        position: absolute;
+        top: 2.4rem;
+        left: 1.05rem;
+        width: 3.2rem;
+        -webkit-animation: moveTop 1s ease forwards;
+        animation: moveTop 1s ease forwards;
+    }
+
+    .anim-slogan {
+        position: absolute;
+        top: .85rem;
+        left: 4.375rem;
+        width: 2.8rem;
+        -webkit-transform-origin: bottom left;
+        transform-origin: bottom left;
+        -webkit-animation: swing .2s ease-in forwards;
+        animation: swing .2s ease-in forwards;
+    }
+
+    .anim-xiaohongbao {
+        position: absolute;
+        top: 4.1rem;
+        right: 2.9rem;
+        width: 3.75rem;
+        -webkit-animation: rubberBand .5s ease forwards;
+        animation: rubberBand .5s ease forwards;
+    }
+
+    .anim-fire {
+        position: absolute;
+        top: 1.25rem;
+        right: 0rem;
+        width: 4.7rem;
+        opacity: 0;
+        -webkit-animation: blink .2s ease-in .1s forwards;
+        animation: blink .2s ease-in .1s forwards;
+    }
+
+    @-webkit-keyframes swing {
+        from {
+            -webkit-transform: rotate3d(0, 0, 1, 20deg);
+            transform: rotate3d(0, 0, 1, 20deg);
+        }
+        to {
+            -webkit-transform: rotate3d(0, 0, 1, 0deg);
+            transform: rotate3d(0, 0, 1, 0deg);
+        }
+    }
+
+    @-webkit-keyframes rubberBand {
+        from {
+            -webkit-transform: scale3d(1, 1, 1);
+            transform: scale3d(1, 1, 1);
+        }
+        30% {
+            -webkit-transform: scale3d(1.25, 0.75, 1);
+            transform: scale3d(1.25, 0.75, 1);
+        }
+        40% {
+            -webkit-transform: scale3d(0.75, 1.25, 1);
+            transform: scale3d(0.75, 1.25, 1);
+        }
+        50% {
+            -webkit-transform: scale3d(1.15, 0.85, 1);
+            transform: scale3d(1.15, 0.85, 1);
+        }
+        65% {
+            -webkit-transform: scale3d(.95, 1.05, 1);
+            transform: scale3d(.95, 1.05, 1);
+        }
+        75% {
+            -webkit-transform: scale3d(1.05, .95, 1);
+            transform: scale3d(1.05, .95, 1);
+        }
+        to {
+            -webkit-transform: scale3d(1, 1, 1);
+            transform: scale3d(1, 1, 1);
+        }
+    }
+
+    img {
+        width: 100%;
+        display: block;
+    }
+    </style>
+</head>
+
+<body>
+    <div class="page-group">
+        <div class="page page-current">
+            <div class="content ">
+                <div class="banner">
+                    <img src="../../img/ball.png" alt="" class="anim-ball">
+                    <img src="../../img/slogan.png" alt="" class="anim-slogan">
+                    <img src="../../img/xiaohongbao.png" alt="" class="anim-xiaohongbao">
+                    <img src="../../img/fire.png" alt="" class="anim-fire">
+                    <img src="../../img/activity11-01.png" alt="">
+                </div>
+                <div class="product-youxinbao">
+                    <div class="l-arrows">
+                        <img src="../../img/activity11-larrow3.png" alt="" class="arrow arrow3">
+                        <img src="../../img/activity11-larrow2.png" alt="" class="arrow arrow2">
+                        <img src="../../img/activity11-larrow1.png" alt="" class="arrow arrow1">
+                    </div>
+                    <div class="r-arrows">
+                        <img src="../../img/activity11-rarrow1.png" alt="" class="arrow arrow1">
+                        <img src="../../img/activity11-rarrow2.png" alt="" class="arrow arrow2">
+                        <img src="../../img/activity11-rarrow3.png" alt="" class="arrow arrow3">
+                    </div>
+                    <img src="../../img/activity11-02.png" alt="">
+                    <a href="" class="butn">
+                        <img src="../../img/activity11-button.png" alt="">
+                    </a>
+                </div>
+                <div class="header">
+                    <div class="l-arrows">
+                        <img src="../../img/activity11-larrow3.png" alt="" class="arrow arrow3">
+                        <img src="../../img/activity11-larrow2.png" alt="" class="arrow arrow2">
+                        <img src="../../img/activity11-larrow1.png" alt="" class="arrow arrow1">
+                    </div>
+                    <div class="r-arrows">
+                        <img src="../../img/activity11-rarrow1.png" alt="" class="arrow arrow1">
+                        <img src="../../img/activity11-rarrow2.png" alt="" class="arrow arrow2">
+                        <img src="../../img/activity11-rarrow3.png" alt="" class="arrow arrow3">
+                    </div>
+                    <img src="../../img/activity11-03.png" alt="">
+                </div>
+                <div class="awards-list">
+                    <img src="../../img/activity11-04.png" alt="">
+                    <div class="awards-content" id="awards">
+                        <ul id="awardsA">
+                            <li>
+                                <span class="tel">18611745835</span><span>拆出1000元</span>
+                            </li>
+                            <li>
+                                <span class="tel">18611745836</span><span>拆出1000元</span>
+                            </li>
+                            <li>
+                                <span class="tel">18611745837</span><span>拆出1000元</span>
+                            </li>
+                            <li>
+                                <span class="tel">18611745838</span><span>拆出1000元</span>
+                            </li>
+                        </ul>
+                        <ul id="awardsB"></ul>
+                    </div>
+                </div>
+                <img src="../../img/activity11-05.png" alt="">
+                <img src="../../img/activity11-06.png" alt="">
+            </div>
+        </div>
+        <div class="mask">
+            <div class="redPacket-close">
+                <img src="../../img/redPacket-close.png" alt="" id="redpacket_close">
+                <img src="../../img/redPacket-hand.png" alt="" class="anim-hand">
+            </div>
+            <div class="redPacket-open" id="redpacket_open">
+                <div class="redpacket-open1">
+                    <img src="../../img/redPacket-open1.png" alt="">
+                    <img src="../../img/redpacket-cover.png" alt="" class="cover">
+                </div>
+                <div class="redpacket-open2">
+                    <p class="money">1111</p>
+                    <img src="../../img/redPacket-open2.png" alt="" class="anim-money">
+                </div>
+                <img src="../../img/redPacket-open3.png" alt="" class="anim-fireworks">
+            </div>
+        </div>
+    </div>
+    <!-- <script src="../../js/lib.min.js"></script> -->
+    <script>
+    $(function() {
+        var awards = $("#awards")[0];
+        var awardsA = $("#awardsA")[0];
+        var awardsB = $("#awardsB")[0];
+        var speed = 20; //滚动速度值，值越大速度越慢
+        var nnn = 200 / awardsA.offsetHeight;
+        console.log(awardsA.innerHTML);
+        for (i = 0; i < nnn; i++) {
+            awardsA.innerHTML += awardsA.innerHTML
+        }
+        awardsB.innerHTML = awardsA.innerHTML //克隆awardsB为awardsA
+        function Marquee() {
+            if (awardsB.offsetTop - awards.scrollTop <= 0) //当滚动至awardsA与awardsB交界时
+                awards.scrollTop -= awardsA.offsetHeight //awards跳到最顶端
+            else {
+                awards.scrollTop++
+            }
+        }
+        var MyMar = setInterval(Marquee, speed); //设置定时器
+
+
+        $('#redpacket_close').on('tap', function() {
+            $(this).hide();
+            $('#redpacket_open').show();
+            var t = setTimeout(function() {
+                $('.mask').hide();
+            }, 3000);
+        });
+
+    });
+    </script>
+</body>
+
+</html>

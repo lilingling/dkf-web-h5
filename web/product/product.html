@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>理财</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no" />
+    <link rel="stylesheet" href="../../css/sm.css">
+    <link rel="stylesheet" href="../../css/sm-extend.css">
+    <link rel="stylesheet" href="../../css/product.css">
+</head>
+
+<body>
+    <div class="page-group">
+        <div class="page page-current">
+            <div class="content">
+                <div class="module-area">
+                    <div class="row no-gutter">
+                        <div class="col-33 module module-gushou">
+                             <a href="gushou_list.html" class="external">
+                                <i class="icon icon-module icon-module-gushou"></i>
+                                <em>固收理财</em>
+                            </a>
+                        </div>
+                        <div class="col-33 module module-jijin">
+                            <a href="#">
+                                <i class="icon icon-module icon-module-jijin"></i>
+                                <em>基金理财</em>
+                            </a>
+                        </div>
+                        <div class="col-33 module module-piaoju">
+                            <a href="#">
+                                <i class="icon icon-module icon-module-piaoju"></i>
+                                <em>票据理财</em>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="recommend-product" id="productContent">
+                    <div class="recommend-title">
+                        <img src="../../img/recomnd-star2.png" alt="">
+                    </div>
+                    <div class="product-banner">
+                        <!-- Swiper -->
+                        <div class="swiper-container">
+                            <div class="swiper-wrapper">
+                                <div class="swiper-slide">
+                                    <a href="gushou_buy.html" id="container1" class="circle-outer external" data-percentange="80">
+                                        <div class="banner-content">
+                                            <div class="banner-title"><i class="icon icon-banner-piaoju"></i>票据</div>
+                                            <div class="prop-name">预期年化(%)</div>
+                                            <div class="prop-value">12</div>
+                                            <div class="prop-extraname">起投金额：<strong>1</strong>元</div>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="swiper-slide">
+                                    <a href="gushou_buy.html" id="container2" class="circle-outer external" data-percentange="80">
+                                        <div class="banner-content">
+                                            <div class="banner-title"><i class="icon icon-banner-gushou"></i>固收</div>
+                                            <div class="prop-name">预期年化(%)</div>
+                                            <div class="prop-value">12</div>
+                                            <div class="prop-extraname">起投金额：<strong>1</strong>元</div>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="swiper-slide">
+                                    <a href="gushou_buy.html" id="container3" class="circle-outer external" data-percentange="80">
+                                        <div class="banner-content">
+                                            <div class="banner-title"><i class="icon icon-banner-jijin"></i>基金</div>
+                                            <div class="prop-name">预期年化(%)</div>
+                                            <div class="prop-value">12</div>
+                                            <div class="prop-extraname">起投金额：<strong>1</strong>元</div>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="swiper-slide">
+                                    <a href="gushou_buy.html" id="container4" class="circle-outer external" data-percentange="80">
+                                        <div class="banner-content">
+                                            <div class="banner-title"><i class="icon icon-banner-jijin"></i>票据</div>
+                                            <div class="prop-name">预期年化(%)</div>
+                                            <div class="prop-value">12</div>
+                                            <div class="prop-extraname">起投金额：<strong>1</strong>元</div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="list-block activity-product">
+                    <ul>
+                        <li class="item-content item-link ">
+                            <div class="item-inner">
+                                <div class="item-title-row">
+                                    <div class="item-title">新手专享</div>
+                                    <div class="item-subtitle">新手专享,放心首选</div>
+                                </div>
+                                <div class="item-after"><i class="icon icon-account icon-product-newUser"></i></div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="list-block activity-product">
+                    <ul>
+                        <li class="item-content item-link">
+                            <div class="item-inner">
+                                <div class="item-title-row">
+                                    <div class="item-title">活动专享</div>
+                                    <div class="item-subtitle">新手专享,放心首选</div>
+                                </div>
+                                <div class="item-after"><i class="icon icon-account icon-product-activity"></i></div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type='text/javascript' src='../../js/lib/zepto.js' charset='utf-8'></script>
+    <script type='text/javascript' src='../../js/lib/sm.js' charset='utf-8'></script>
+    <script type='text/javascript' src='../../js/lib/sm-extend.min.js' charset='utf-8'></script>
+    <script src="../../js/lib/vue.min.js"></script>
+    <script src="../../js/lib/vue-validator.min.js"></script>
+    <script src="../../js/progressbar.min.js"></script>
+    <script src="../../js/lib/swiper.min.js"></script>
+    <script>
+    var percentange = $('#container1').data('percentange') / 100;
+    var bar = new ProgressBar.Circle(container1, {
+        strokeWidth: '4',
+        easing: 'easeInOut',
+        duration: 1400,
+        color: '#4fa6dd',
+        trailColor: '#dcdcdc',
+        trailWidth: 4,
+        svgStyle: null
+    });
+    bar.animate(percentange); // Number from 0.0 to 1.0
+
+    var bar2 = new ProgressBar.Circle(container2, {
+        strokeWidth: '4',
+        easing: 'easeInOut',
+        duration: 1400,
+        color: '#4fa6dd',
+        trailColor: '#dcdcdc',
+        trailWidth: 4,
+        svgStyle: null
+    });
+    bar2.animate(percentange); // Number from 0.0 to 1.0
+
+    var bar3 = new ProgressBar.Circle(container3, {
+        strokeWidth: '4',
+        easing: 'easeInOut',
+        duration: 1400,
+        color: '#4fa6dd',
+        trailColor: '#dcdcdc',
+        trailWidth: 4,
+        svgStyle: null
+    });
+    bar3.animate(percentange); // Number from 0.0 to 1.0
+
+    var bar4 = new ProgressBar.Circle(container4, {
+        strokeWidth: '4',
+        easing: 'easeInOut',
+        duration: 1400,
+        color: '#4fa6dd',
+        trailColor: '#dcdcdc',
+        trailWidth: 4,
+        svgStyle: null
+    });
+    bar4.animate(percentange); // Number from 0.0 to 1.0
+
+    var swiper = new Swiper('.swiper-container', {
+        pagination: '.swiper-pagination',
+        slidesPerView: 'auto',
+        centeredSlides: true,
+        paginationClickable: true,
+        spaceBetween: 25
+    });
+    </script>
+</body>
+
+</html>
